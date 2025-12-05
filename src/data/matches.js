@@ -1,3 +1,6 @@
+// Static AFCON match data.
+// You can expand this with the full schedule.
+
 export const matches = [
   {
     id: "morocco-v-comoros",
@@ -8,7 +11,7 @@ export const matches = [
     stadium: "Stade de Casablanca",
     city: "Casablanca",
     status: "upcoming",
-    kickoffTime: "2025-12-21T19:00:00Z", // 7pm UK, adjust if needed
+    kickoffTime: "2025-12-21T19:00:00Z",
     homeScore: 0,
     awayScore: 0,
     minute: "KO",
@@ -37,7 +40,6 @@ export const matches = [
     stats: null,
     events: []
   },
-  // keep your Senegal v Nigeria “live” example, but add tv info:
   {
     id: "senegal-v-nigeria",
     homeTeam: "Senegal",
@@ -51,7 +53,7 @@ export const matches = [
     homeScore: 1,
     awayScore: 1,
     minute: "63'",
-    tvChannel: "4seven",
+    tvChannel: "Channel 4",
     tvPlatforms: ["Channel 4 Streaming", "C4 Sport YouTube"],
     nationIds: ["senegal", "nigeria"],
     stats: {
@@ -67,8 +69,64 @@ export const matches = [
       foulsAway: 10
     },
     events: [
-      // (your existing events)
+      {
+        id: 1,
+        minute: "12'",
+        type: "goal",
+        team: "Nigeria",
+        text: "Osimhen heads in from close range after a wicked delivery from the right."
+      },
+      {
+        id: 2,
+        minute: "39'",
+        type: "card",
+        team: "Senegal",
+        text: "Yellow card for Koulibaly after a late tackle on the halfway line."
+      },
+      {
+        id: 3,
+        minute: "55'",
+        type: "chance",
+        team: "Senegal",
+        text: "Sarr cuts inside and fires just over from the edge of the box."
+      },
+      {
+        id: 4,
+        minute: "60'",
+        type: "goal",
+        team: "Senegal",
+        text: "Penalty to Senegal. Mane sends the keeper the wrong way and levels the game."
+      }
     ]
   },
-  // ...add the rest of the AFCON schedule as you go
+  {
+    id: "morocco-v-egypt",
+    homeTeam: "Morocco",
+    awayTeam: "Egypt",
+    competition: "AFCON 2025",
+    stage: "Group A",
+    stadium: "Stade de Casablanca",
+    city: "Casablanca",
+    status: "finished",
+    kickoffTime: "2025-12-19T19:00:00Z",
+    homeScore: 2,
+    awayScore: 1,
+    minute: "FT",
+    tvChannel: "Channel 4",
+    tvPlatforms: ["Channel 4 Streaming"],
+    nationIds: ["morocco", "egypt"],
+    stats: {
+      possessionHome: 54,
+      possessionAway: 46,
+      shotsHome: 11,
+      shotsAway: 8,
+      shotsOnTargetHome: 5,
+      shotsOnTargetAway: 4,
+      cornersHome: 4,
+      cornersAway: 3,
+      foulsHome: 9,
+      foulsAway: 12
+    },
+    events: []
+  }
 ];
