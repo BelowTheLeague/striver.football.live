@@ -9,7 +9,7 @@ export default function App() {
     <div className="app">
       <header className="site-header">
         <div className="site-title">
-          <span className="badge">AFCON</</span> Live Football Centre
+          <span className="badge">AFCON</span> Live Football Centre
         </div>
         <nav className="nav">
           <NavLink to="/" className="nav-link">
@@ -36,7 +36,8 @@ export default function App() {
       </main>
 
       <footer className="site-footer">
-        AFCON Live Centre · Built for live football coverage and post-match reports
+        AFCON Live Centre · Built for live football coverage and post-match
+        reports
       </footer>
     </div>
   );
