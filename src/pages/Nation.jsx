@@ -12,8 +12,8 @@ export default function Nation() {
     return <div>Nation not found.</div>;
   }
 
-  const nationMatches = matches.filter((m) =>
-    m.nationIds && m.nationIds.includes(nation.id)
+  const nationMatches = matches.filter(
+    (m) => m.nationIds && m.nationIds.includes(nation.id)
   );
 
   const nextNationMatch =
@@ -24,7 +24,9 @@ export default function Nation() {
       )[0] || null;
 
   const nationArticles = articles.filter(
-    (a) => a.nationId === nation.id || (a.nationIds || []).includes(nation.id)
+    (a) =>
+      a.nationId === nation.id ||
+      (a.nationIds && a.nationIds.includes(nation.id))
   );
 
   const nationPlayers = players.filter((p) => p.nationId === nation.id);
