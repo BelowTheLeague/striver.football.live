@@ -1,12 +1,39 @@
+/* 
+  Striver-style AFCON Live Centre
+  --------------------------------
+  Adjust these variables to match Striver’s exact brand palette.
+*/
+
 :root {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  background: #050711;
-  color: #f5f5f5;
+  /* 💚 Brand palette (tweak these to match official Striver colours) */
+  --striver-primary: #0ba37f;    /* main green */
+  --striver-primary-soft: #e5f6f1;
+  --striver-accent: #ff7f3f;     /* accent (buttons / highlights) */
+  --striver-dark: #111827;
+  --striver-muted: #6b7280;
+
+  /* 🎨 UI colours */
+  --page-bg: #f4f6fb;
+  --card-bg: #ffffff;
+  --border-soft: #e5e7eb;
+  --border-strong: #d1d5db;
+
+  /* ✍️ Typography */
+  --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  background: radial-gradient(circle at top left, #192041 0, #050711 50%);
+  font-family: var(--font-main);
+  background: var(--page-bg);
+  color: var(--striver-dark);
 }
 
 /* APP SHELL */
@@ -18,10 +45,9 @@ body {
 }
 
 .site-header {
-  background: rgba(10, 12, 30, 0.96);
-  border-bottom: 1px solid rgba(82, 90, 160, 0.5);
-  backdrop-filter: blur(10px);
-  padding: 0.8rem 1.6rem;
+  background: #ffffff;
+  border-bottom: 1px solid var(--border-soft);
+  padding: 0.9rem 1.6rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -36,55 +62,58 @@ body {
   display: flex;
   align-items: center;
   gap: 0.55rem;
+  color: var(--striver-dark);
 }
 
 .badge {
-  background: linear-gradient(135deg, #f94144, #f3722c);
-  padding: 0.18rem 0.55rem;
+  background: var(--striver-primary);
+  color: #ffffff;
+  padding: 0.18rem 0.65rem;
   border-radius: 999px;
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 
 .nav {
   display: flex;
-  gap: 1rem;
+  gap: 1.1rem;
 }
 
 .nav-link {
-  color: #cfd1ff;
+  color: var(--striver-muted);
   text-decoration: none;
   font-size: 0.9rem;
-  padding-bottom: 0.15rem;
+  padding-bottom: 0.2rem;
   border-bottom: 2px solid transparent;
 }
 
 .nav-link:hover {
-  color: #ffffff;
+  color: var(--striver-dark);
 }
 
 .nav-link.active {
   font-weight: 600;
-  border-bottom-color: #f3722c;
+  color: var(--striver-primary);
+  border-bottom-color: var(--striver-primary);
 }
 
 /* MAIN LAYOUT */
 
 .main {
   flex: 1;
-  padding: 1.7rem 1.2rem 1.5rem;
+  padding: 1.6rem 1.1rem 1.7rem;
   max-width: 1120px;
   margin: 0 auto;
 }
 
 .site-footer {
-  padding: 0.8rem 1.5rem;
-  font-size: 0.8rem;
-  background: #0b0d1b;
-  color: #a0a3c0;
+  padding: 0.9rem 1.5rem;
+  font-size: 0.82rem;
+  background: #ffffff;
+  color: var(--striver-muted);
   text-align: center;
-  border-top: 1px solid rgba(82, 90, 160, 0.4);
+  border-top: 1px solid var(--border-soft);
 }
 
 /* GRID LAYOUTS */
@@ -92,7 +121,7 @@ body {
 .layout,
 .match-layout {
   display: grid;
-  grid-template-columns: minmax(0, 2.3fr) minmax(0, 1.2fr);
+  grid-template-columns: minmax(0, 2.4fr) minmax(0, 1.3fr);
   gap: 1.6rem;
 }
 
@@ -111,90 +140,100 @@ body {
   min-width: 0;
 }
 
-/* TYPOGRAPHY & HEADERS */
+/* TYPOGRAPHY */
 
 .page-title {
   margin-top: 0;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.3rem;
   font-size: 1.4rem;
 }
 
 .page-intro {
   margin-top: 0;
-  margin-bottom: 1.15rem;
-  color: #a0a3c0;
+  margin-bottom: 1.1rem;
+  color: var(--striver-muted);
   font-size: 0.95rem;
 }
 
 .section-title {
-  margin-top: 1.35rem;
+  margin-top: 1.3rem;
   margin-bottom: 0.5rem;
-  font-size: 0.86rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: #a7abff;
+  color: var(--striver-muted);
 }
 
-/* CARDS */
+/* GENERIC CARD */
+
+.card,
+.stats-card,
+.related-articles,
+.match-mini-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  border: 1px solid var(--border-soft);
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
+}
+
+/* MATCH CARDS LIST */
 
 .cards {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
+  gap: 0.9rem;
 }
 
-.card {
-  background: radial-gradient(circle at top left, #242846 0, #131627 60%);
-  border-radius: 10px;
-  padding: 0.8rem 0.95rem;
-  border: 1px solid rgba(96, 104, 176, 0.7);
+.match-card {
+  padding: 0.85rem 0.95rem;
   text-decoration: none;
   color: inherit;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
-  transition: transform 0.12s ease-out, box-shadow 0.12s ease-out,
-    border-color 0.12s ease-out, background 0.12s ease-out;
+  transition: box-shadow 0.12s ease-out, border-color 0.12s ease-out,
+    transform 0.12s ease-out;
 }
 
-.card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.55);
-  border-color: #f3722c;
-  background: radial-gradient(circle at top left, #2b3159 0, #161a2b 60%);
+.match-card:hover {
+  border-color: var(--striver-primary);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+  transform: translateY(-1px);
 }
-
-/* MATCH CARDS */
 
 .match-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.45rem;
+  margin-bottom: 0.4rem;
   font-size: 0.8rem;
 }
 
 .match-competition {
-  color: #a0a3c0;
+  color: var(--striver-muted);
 }
 
 .status {
   font-size: 0.7rem;
-  padding: 0.12rem 0.5rem;
+  padding: 0.12rem 0.55rem;
   border-radius: 999px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 
 .status-live {
-  background: #f94144;
+  background: rgba(239, 68, 68, 0.08);
+  color: #b91c1c;
+  border: 1px solid rgba(248, 113, 113, 0.6);
 }
 
 .status-upcoming {
-  background: #ffb703;
-  color: #111;
+  background: rgba(251, 191, 36, 0.12);
+  color: #92400e;
+  border: 1px solid rgba(251, 191, 36, 0.6);
 }
 
 .status-finished {
-  background: #1b4332;
+  background: rgba(16, 185, 129, 0.1);
+  color: #047857;
+  border: 1px solid rgba(52, 211, 153, 0.6);
 }
 
 .match-card-body .teams {
@@ -206,18 +245,18 @@ body {
 }
 
 .score {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .match-meta {
   margin-top: 0.3rem;
   font-size: 0.78rem;
-  color: #a0a3c0;
+  color: var(--striver-muted);
   display: flex;
   justify-content: space-between;
 }
 
-/* ARTICLE LISTS */
+/* ARTICLE LIST */
 
 .article-list {
   list-style: none;
@@ -226,7 +265,7 @@ body {
 }
 
 .article-list-item + .article-list-item {
-  margin-top: 0.8rem;
+  margin-top: 0.75rem;
 }
 
 .article-link {
@@ -241,7 +280,7 @@ body {
 
 .article-summary {
   font-size: 0.85rem;
-  color: #a0a3c0;
+  color: var(--striver-muted);
   margin-top: 0.18rem;
 }
 
@@ -253,7 +292,12 @@ body {
   display: inline-block;
   margin-top: 0.75rem;
   font-size: 0.84rem;
-  color: #ffd166;
+  color: var(--striver-primary);
+  text-decoration: none;
+}
+
+.view-all-link:hover {
+  text-decoration: underline;
 }
 
 /* MATCH PAGE HEADER */
@@ -264,7 +308,7 @@ body {
 
 .match-status {
   font-size: 0.8rem;
-  color: #ffb703;
+  color: var(--striver-primary);
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -276,7 +320,7 @@ body {
 
 .match-meta {
   font-size: 0.8rem;
-  color: #a0a3c0;
+  color: var(--striver-muted);
   display: flex;
   gap: 0.8rem;
   flex-wrap: wrap;
@@ -295,7 +339,7 @@ body {
 /* LIVE UPDATES */
 
 .live-updates {
-  margin-top: 1.6rem;
+  margin-top: 1.55rem;
 }
 
 .events-list {
@@ -308,13 +352,13 @@ body {
   display: grid;
   grid-template-columns: 3rem minmax(0, 1fr);
   gap: 0.8rem;
-  padding: 0.65rem 0;
-  border-bottom: 1px solid rgba(66, 70, 113, 0.85);
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--border-soft);
 }
 
 .event-minute {
   font-size: 0.86rem;
-  color: #a0a3c0;
+  color: var(--striver-muted);
 }
 
 .event-body {
@@ -323,24 +367,24 @@ body {
 
 .event-type {
   font-size: 0.78rem;
-  color: #a7abff;
+  color: var(--striver-muted);
   margin-bottom: 0.12rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
 
 .event-goal .event-body {
-  border-left: 3px solid #38b000;
+  border-left: 3px solid var(--striver-primary);
   padding-left: 0.5rem;
 }
 
 .event-card .event-body {
-  border-left: 3px solid #ffb703;
+  border-left: 3px solid #fbbf24;
   padding-left: 0.5rem;
 }
 
 .event-chance .event-body {
-  border-left: 3px solid #219ebc;
+  border-left: 3px solid var(--striver-accent);
   padding-left: 0.5rem;
 }
 
@@ -349,12 +393,7 @@ body {
 .stats-card,
 .related-articles,
 .match-mini-card {
-  background: radial-gradient(circle at top left, #242846 0, #131627 60%);
-  border-radius: 10px;
   padding: 0.9rem 0.95rem 1rem;
-  border: 1px solid rgba(96, 104, 176, 0.7);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
-  margin-bottom: 1.1rem;
 }
 
 .stats-table {
@@ -382,11 +421,11 @@ body {
 
 .breadcrumb {
   font-size: 0.8rem;
-  color: #a0a3c0;
+  color: var(--striver-muted);
 }
 
 .breadcrumb a {
-  color: #ffd166;
+  color: var(--striver-primary);
   text-decoration: none;
 }
 
@@ -394,10 +433,10 @@ body {
 
 .muted {
   font-size: 0.8rem;
-  color: #a0a3c0;
+  color: var(--striver-muted);
 }
 
-/* TEAMS MINI CARD */
+/* MINI MATCH CARD */
 
 .match-mini-card .teams {
   display: grid;
