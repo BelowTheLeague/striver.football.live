@@ -17,7 +17,13 @@ export default function Match() {
     return <div>Match not found.</div>;
   }
 
-  const relatedArticles = articles.filter((a) => a.matchId === match.id);
+  const relatedArticles = articles.filter(
+    (a) =>
+      a.matchId === match.id ||
+      (a.nationIds &&
+        match.nationIds &&
+        a.nationIds.some((na) => match.nationIds.includes(na)))
+  );
 
   return (
     <div className="match-layout">
@@ -34,6 +40,12 @@ export default function Match() {
             <span>
               {match.stadium}, {match.city}
             </span>
+            {match.tvChannel && (
+              <span>
+                Live on {match.tvChannel}
+                {match.tvPlatforms && ` · ${match.tvPlatforms.join(" · ")}`}
+              </span>
+            )}
           </div>
           <div className="match-scoreline">
             <span className="team">{match.homeTeam}</span>
@@ -47,7 +59,9 @@ export default function Match() {
         <section className="live-updates">
           <h2 className="section-title">Live text commentary</h2>
           {match.events.length === 0 && (
-            <p className="muted">Updates will appear here once the match kicks off.</p>
+            <p className="muted">
+              Updates will appear here once the match kicks off.
+            </p>
           )}
           <ul className="events-list">
             {match.events
