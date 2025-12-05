@@ -1,5 +1,3 @@
-// Simple sample squads. Expand with full squads as needed.
-
 export const players = [
   {
     id: "morocco-ziyech-7",
@@ -60,5 +58,15 @@ export const players = [
     club: "Leicester City",
     rating: 83,
     imageUrl: "https://via.placeholder.com/180x220?text=Iheanacho"
+  },
+  {
+    id: "zimbabwe-bonne-14",
+    nationId: "zimbabwe",
+    name: "Macauley Bonne",
+    position: "ST",
+    number: 14,
+    club: "Maldon & Tiptree / Zimbabwe",
+    rating: 84,
+    imageUrl: "https://via.placeholder.com/180x220?text=Macauley+Bonne"
   }
 ];
