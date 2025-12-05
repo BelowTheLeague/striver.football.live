@@ -35,4 +35,14 @@ With colour, noise and pressure in equal measure, this feels like a statement ni
     matchId: "morocco-v-egypt",
     publishedAt: "2025-12-09T10:00:00Z"
   }
+{
+  id: "afcon-hosts-morocco-preview",
+  title: "Hosts Morocco look to make a statement in Group A opener",
+  summary: "...",
+  body: "...",
+  matchId: "morocco-v-comoros",
+  nationId: "morocco",
+  publishedAt: "2025-12-09T10:00:00Z"
+}
+
 ];
