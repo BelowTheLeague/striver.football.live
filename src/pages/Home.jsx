@@ -126,4 +126,119 @@ export default function Home({ showOnlyMatches = false }) {
               )}
             </button>
             <button
-              className={`tab-btn ${tab ===
+              className={`tab-btn ${tab === "all" ? "tab-btn-active" : ""}`}
+              onClick={() => setTab("all")}
+            >
+              All{" "}
+              {sortedMatches.length > 0 && (
+                <span className="tab-count">{sortedMatches.length}</span>
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* MATCH LIST */}
+        <div className="cards">
+          {filteredMatches.length === 0 ? (
+            <div className="empty-state">
+              No matches in this view. Try another tab.
+            </div>
+          ) : (
+            filteredMatches.map((m) => (
+              <Link key={m.id} to={`/match/${m.id}`} className="card match-card">
+                <div className="match-card-header">
+                  <span className={`status status-${m.status}`}>
+                    {m.status === "live"
+                      ? "LIVE"
+                      : m.status === "upcoming"
+                      ? "FIXTURE"
+                      : "FT"}
+                  </span>
+                  <span className="match-competition">
+                    {m.competition} · {m.stage}
+                  </span>
+                </div>
+                <div className="match-card-body">
+                  <div className="teams">
+                    <span>{m.homeTeam}</span>
+                    <span className="score">
+                      {m.homeScore} – {m.awayScore}
+                    </span>
+                    <span>{m.awayTeam}</span>
+                  </div>
+                  <div className="match-meta">
+                    <span>
+                      {m.stadium}, {m.city}
+                    </span>
+                    <span>{m.status === "live" ? m.minute : ""}</span>
+                  </div>
+                </div>
+              </Link>
+            ))
+          )}
+        </div>
+
+        {/* RESULTS STRIP (recent finished) */}
+        {finishedMatches.length > 0 && (
+          <div className="results-strip">
+            <h3 className="results-title">Latest results</h3>
+            <div className="results-chips">
+              {finishedMatches.slice(0, 6).map((m) => (
+                <Link
+                  key={m.id}
+                  to={`/match/${m.id}`}
+                  className="result-chip"
+                >
+                  {m.homeTeam} {m.homeScore}–{m.awayScore} {m.awayTeam}
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+      </section>
+
+      {!showOnlyMatches && (
+        <aside className="side-column">
+          <div className="stats-card">
+            <h2 className="section-title">Tournament snapshot</h2>
+            <p className="muted">
+              Live scores, fixtures and instant reports from every game at this
+              year&apos;s AFCON.
+            </p>
+            <ul className="snapshot-list">
+              <li>
+                <span>Live games</span>
+                <strong>{liveMatches.length}</strong>
+              </li>
+              <li>
+                <span>Upcoming fixtures</span>
+                <strong>{upcomingMatches.length}</strong>
+              </li>
+              <li>
+                <span>Total matches tracked</span>
+                <strong>{sortedMatches.length}</strong>
+              </li>
+            </ul>
+          </div>
+
+          <section className="related-articles">
+            <h2 className="section-title">Latest articles</h2>
+            <ul className="article-list">
+              {latestArticles.slice(0, 5).map((a) => (
+                <li key={a.id} className="article-list-item">
+                  <Link to={`/articles/${a.id}`} className="article-link">
+                    <div className="article-title">{a.title}</div>
+                    <div className="article-summary">{a.summary}</div>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <Link to="/articles" className="view-all-link">
+              View all articles
+            </Link>
+          </section>
+        </aside>
+      )}
+    </div>
+  );
+}
