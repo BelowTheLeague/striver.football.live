@@ -10,7 +10,9 @@ export default function Article() {
     return <div>Article not found.</div>;
   }
 
-  const match = matches.find((m) => m.id === article.matchId);
+  const match = article.matchId
+    ? matches.find((m) => m.id === article.matchId)
+    : null;
 
   return (
     <div className="layout">
