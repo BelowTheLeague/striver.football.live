@@ -1,6 +1,3 @@
-// Static AFCON match data.
-// You can expand this with the full schedule.
-
 export const matches = [
   {
     id: "morocco-v-comoros",
@@ -37,6 +34,25 @@ export const matches = [
     tvChannel: "4seven",
     tvPlatforms: ["Channel 4 Streaming", "C4 Sport YouTube"],
     nationIds: ["mali", "zambia"],
+    stats: null,
+    events: []
+  },
+  {
+    id: "zimbabwe-v-ghana",
+    homeTeam: "Zimbabwe",
+    awayTeam: "Ghana",
+    competition: "AFCON 2025",
+    stage: "Group C",
+    stadium: "Stade de Rabat",
+    city: "Rabat",
+    status: "upcoming",
+    kickoffTime: "2025-12-24T17:00:00Z",
+    homeScore: 0,
+    awayScore: 0,
+    minute: "KO",
+    tvChannel: "Channel 4",
+    tvPlatforms: ["Channel 4 Streaming", "C4 Sport YouTube"],
+    nationIds: ["zimbabwe", "ghana"],
     stats: null,
     events: []
   },
