@@ -20,11 +20,6 @@ export default function Home({ showOnlyMatches = false }) {
     if (tab === "live") return liveMatches;
     if (tab === "upcoming") return upcomingMatches;
     return sortedMatches;
-  const nextGame = useMemo(() => {
-    if (upcomingMatches.length === 0) return null;
-    return upcomingMatches[0]; // they’re already time-sorted
-  }, [upcomingMatches]);
-  
   }, [tab, liveMatches, upcomingMatches, sortedMatches]);
 
   const latestArticles = [...articles].sort(
@@ -33,20 +28,19 @@ export default function Home({ showOnlyMatches = false }) {
 
   const heroMatch = liveMatches[0] || upcomingMatches[0] || sortedMatches[0];
 
+  const nextGame =
+    upcomingMatches.length > 0 ? upcomingMatches[0] : heroMatch || null;
+
   return (
     <div className="layout">
       <section className="main-column">
-        {/* TICKER / STRAPLINE */}
+        {/* TICKER */}
         <div className="ticker">
           <span className="ticker-label">Latest</span>
           <div className="ticker-items">
             {liveMatches.length > 0 ? (
               liveMatches.map((m) => (
-                <Link
-                  key={m.id}
-                  to={`/match/${m.id}`}
-                  className="ticker-link"
-                >
+                <Link key={m.id} to={`/match/${m.id}`} className="ticker-link">
                   {m.homeTeam} {m.homeScore}–{m.awayScore} {m.awayTeam} ·{" "}
                   <span className="ticker-minute">{m.minute}</span>
                 </Link>
@@ -58,6 +52,39 @@ export default function Home({ showOnlyMatches = false }) {
             )}
           </div>
         </div>
+
+        {/* NEXT GAME LIVE ON CHANNEL 4 */}
+        {nextGame && (
+          <div className="next-game-card">
+            <div className="next-game-left">
+              <div className="next-game-label">Next game live</div>
+              <div className="next-game-teams">
+                {nextGame.homeTeam} v {nextGame.awayTeam}
+              </div>
+              <div className="next-game-meta">
+                <span>
+                  {nextGame.competition} · {nextGame.stage}
+                </span>
+                <span>
+                  {nextGame.stadium}, {nextGame.city}
+                </span>
+              </div>
+            </div>
+            <div className="next-game-right">
+              <div className="next-game-channel">
+                {nextGame.tvChannel || "Channel 4"}
+              </div>
+              {nextGame.tvPlatforms && (
+                <div className="next-game-platforms">
+                  {nextGame.tvPlatforms.join(" · ")}
+                </div>
+              )}
+              <Link to={`/match/${nextGame.id}`} className="view-all-link">
+                Go to match centre
+              </Link>
+            </div>
+          </div>
+        )}
 
         {/* HERO MATCH */}
         {heroMatch && (
@@ -105,41 +132,8 @@ export default function Home({ showOnlyMatches = false }) {
             </div>
           </Link>
         )}
-                {/* NEXT GAME LIVE ON CHANNEL 4 */}
-        {nextGame && (
-          <div className="next-game-card">
-            <div className="next-game-left">
-              <div className="next-game-label">Next game live</div>
-              <div className="next-game-teams">
-                {nextGame.homeTeam} v {nextGame.awayTeam}
-              </div>
-              <div className="next-game-meta">
-                <span>
-                  {nextGame.competition} · {nextGame.stage}
-                </span>
-                <span>
-                  {nextGame.stadium}, {nextGame.city}
-                </span>
-              </div>
-            </div>
-            <div className="next-game-right">
-              <div className="next-game-channel">
-                {nextGame.tvChannel || "Channel 4"}
-              </div>
-              {nextGame.tvPlatforms && (
-                <div className="next-game-platforms">
-                  {nextGame.tvPlatforms.join(" · ")}
-                </div>
-              )}
-              <Link to={`/match/${nextGame.id}`} className="view-all-link">
-                Go to match centre
-              </Link>
-            </div>
-          </div>
-        )}
 
-
-        {/* TABS */}
+        {/* MAIN HEADER + TABS */}
         <div className="matches-header">
           <h2 className="section-title">AFCON centre</h2>
           <div className="tabs">
@@ -216,7 +210,7 @@ export default function Home({ showOnlyMatches = false }) {
           )}
         </div>
 
-        {/* RESULTS STRIP (recent finished) */}
+        {/* RESULTS STRIP */}
         {finishedMatches.length > 0 && (
           <div className="results-strip">
             <h3 className="results-title">Latest results</h3>
