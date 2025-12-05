@@ -46,5 +46,13 @@ export const nations = [
     flagUrl: "https://flagcdn.com/w320/zm.png",
     shortBio:
       "Former champions with a proud history and an exciting new generation emerging."
+  },
+  {
+    id: "zimbabwe",
+    name: "Zimbabwe",
+    group: "Group C",
+    flagUrl: "https://flagcdn.com/w320/zw.png",
+    shortBio:
+      "Zimbabwe return to the AFCON stage with Macauley Bonne leading the line and a fanbase ready to make noise."
   }
 ];
