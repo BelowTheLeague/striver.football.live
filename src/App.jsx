@@ -42,9 +42,8 @@ export default function App() {
           <NavLink to="/player/macauley-bonne" className="nav-link">
             Player Focus
           </NavLink>
-          <NavLink to="/admin" className="nav-link">
-            Admin
-          </NavLink>
+          {/* Admin is intentionally NOT linked from the public nav.
+              /admin will be protected behind authentication. */}
         </nav>
       </header>
 
