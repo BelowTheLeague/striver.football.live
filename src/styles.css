@@ -1,25 +1,23 @@
 /* 
   Striver-style AFCON Live Centre
-  --------------------------------
-  Adjust these variables to match Striver’s exact brand palette.
+  Clean white layout with Striver-style colours.
 */
 
 :root {
-  /* 💚 Brand palette (tweak these to match official Striver colours) */
-  --striver-primary: #0ba37f;    /* main green */
+  /* Brand palette – tweak to match official Striver colours */
+  --striver-primary: #0ba37f;
   --striver-primary-soft: #e5f6f1;
-  --striver-accent: #ff7f3f;     /* accent (buttons / highlights) */
+  --striver-accent: #ff7f3f;
   --striver-dark: #111827;
   --striver-muted: #6b7280;
 
-  /* 🎨 UI colours */
   --page-bg: #f4f6fb;
   --card-bg: #ffffff;
   --border-soft: #e5e7eb;
   --border-strong: #d1d5db;
 
-  /* ✍️ Typography */
-  --font-main: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
 }
 
 *,
@@ -97,7 +95,7 @@ body {
   border-bottom-color: var(--striver-primary);
 }
 
-/* MAIN LAYOUT */
+/* MAIN */
 
 .main {
   flex: 1;
@@ -163,7 +161,7 @@ body {
   color: var(--striver-muted);
 }
 
-/* GENERIC CARD */
+/* GENERIC CARDS */
 
 .card,
 .stats-card,
@@ -387,7 +385,7 @@ body {
   padding-left: 0.5rem;
 }
 
-/* SIDE CARDS (STATS, RELATED, MINI MATCH) */
+/* SIDE CARDS */
 
 .stats-card,
 .related-articles,
@@ -444,7 +442,8 @@ body {
   align-items: center;
   font-weight: 600;
 }
-/* TICKER / LATEST STRIP */
+
+/* TICKER */
 
 .ticker {
   display: flex;
@@ -494,11 +493,7 @@ body {
 
 .hero-match {
   display: block;
-  background: linear-gradient(
-    135deg,
-    var(--striver-primary-soft),
-    #ffffff
-  );
+  background: linear-gradient(135deg, var(--striver-primary-soft), #ffffff);
   border-radius: 16px;
   border: 1px solid var(--border-soft);
   padding: 0.95rem 1rem 1rem;
@@ -543,9 +538,197 @@ body {
 
 .hero-score {
   display: flex;
-  align-items
+  align-items: center;
+  gap: 0.35rem;
+}
 
-  /* NATION GRID */
+.hero-score-number {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.hero-score-divider {
+  font-size: 1.2rem;
+  color: var(--striver-muted);
+}
+
+.hero-minute-pill {
+  background: rgba(15, 23, 42, 0.06);
+  border-radius: 999px;
+  padding: 0.1rem 0.5rem;
+  font-size: 0.78rem;
+  color: var(--striver-muted);
+}
+
+.hero-bottom {
+  font-size: 0.8rem;
+  color: var(--striver-muted);
+}
+
+/* TABS / FILTERS */
+
+.matches-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.4rem;
+  margin-bottom: 0.6rem;
+}
+
+.tabs {
+  display: inline-flex;
+  background: #e5e7eb;
+  border-radius: 999px;
+  padding: 0.15rem;
+}
+
+.tab-btn {
+  border: none;
+  background: transparent;
+  padding: 0.25rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  color: var(--striver-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.tab-btn-active {
+  background: #ffffff;
+  color: var(--striver-dark);
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.18);
+}
+
+.tab-count {
+  background: rgba(148, 163, 184, 0.2);
+  border-radius: 999px;
+  padding: 0.05rem 0.4rem;
+  font-size: 0.75rem;
+}
+
+/* EMPTY STATE */
+
+.empty-state {
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px dashed var(--border-strong);
+  background: #f9fafb;
+  font-size: 0.9rem;
+  color: var(--striver-muted);
+}
+
+/* RESULTS STRIP */
+
+.results-strip {
+  margin-top: 1.2rem;
+}
+
+.results-title {
+  margin: 0 0 0.4rem;
+  font-size: 0.88rem;
+  color: var(--striver-muted);
+}
+
+.results-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.result-chip {
+  font-size: 0.8rem;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-soft);
+  background: #ffffff;
+  text-decoration: none;
+  color: var(--striver-dark);
+}
+
+.result-chip:hover {
+  border-color: var(--striver-primary);
+}
+
+/* SNAPSHOT LIST */
+
+.snapshot-list {
+  list-style: none;
+  padding: 0;
+  margin: 0.6rem 0 0;
+  font-size: 0.86rem;
+}
+
+.snapshot-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.22rem 0;
+}
+
+.snapshot-list span {
+  color: var(--striver-muted);
+}
+
+/* NEXT GAME LIVE */
+
+.next-game-card {
+  margin-bottom: 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-soft);
+  background: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+}
+
+.next-game-card.small {
+  margin-top: 0.5rem;
+  padding: 0.6rem 0.75rem;
+}
+
+.next-game-left {
+  min-width: 0;
+}
+
+.next-game-label {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--striver-primary);
+  margin-bottom: 0.15rem;
+}
+
+.next-game-teams {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.next-game-meta {
+  font-size: 0.8rem;
+  color: var(--striver-muted);
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.next-game-right {
+  text-align: right;
+  font-size: 0.8rem;
+}
+
+.next-game-channel {
+  font-weight: 600;
+}
+
+.next-game-platforms {
+  color: var(--striver-muted);
+  margin-bottom: 0.25rem;
+}
+
+/* NATION GRID */
 
 .nation-grid {
   display: grid;
@@ -619,13 +802,6 @@ body {
 
 .nation-hero-text {
   flex: 1;
-}
-
-/* SMALL VARIANT OF NEXT GAME CARD */
-
-.next-game-card.small {
-  margin-top: 0.5rem;
-  padding: 0.6rem 0.75rem;
 }
 
 /* PLAYER CARDS – FIFA STYLE */
