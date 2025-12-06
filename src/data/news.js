@@ -7,6 +7,9 @@ export const newsItems = [
     date: "2025-01-11T23:00:00Z",
     blurb:
       "Late drama, big calls and early shocks – here are the key stories from day one.",
+    // square image placeholder (add to /public/images/news/)
+    image: "/images/news/afcon-opening-square.jpg",
+    isLive: true, // show flashing LIVE badge
   },
   {
     id: "news-2",
@@ -14,6 +17,8 @@ export const newsItems = [
     date: "2025-01-10T18:00:00Z",
     blurb:
       "From breakout stars to seasoned pros, these players could define the tournament.",
+    image: "/images/news/players-to-watch-square.jpg",
+    isLive: false,
   },
   {
     id: "news-3",
@@ -21,6 +26,8 @@ export const newsItems = [
     date: "2025-01-09T12:30:00Z",
     blurb:
       "Live match centres, fan chat, podcasts and non-stop social coverage across the tournament.",
+    image: "/images/news/striver-coverage-square.jpg",
+    isLive: false,
   },
 ];
 
