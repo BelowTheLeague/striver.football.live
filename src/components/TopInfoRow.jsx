@@ -18,34 +18,17 @@ function TopInfoRow({ matches }) {
   const getCountdown = (kickOff) => {
     if (!kickOff) return "";
     const ko = new Date(kickOff);
-    const diffMs = ko.getTime() - now.getTime();
+    const diffMs = ko - now;
     if (diffMs <= 0) return "Kicking off now";
 
-    const totalMins = Math.floor(diffMs / 60000);
-    const hours = Math.floor(totalMins / 60);
-    const mins = totalMins % 60;
+    const mins = Math.floor(diffMs / 60000);
+    const hours = Math.floor(mins / 60);
+    const rem = mins % 60;
 
-    if (hours <= 0) return `${mins} min`;
-    return `${hours}h ${mins}m`;
+    return hours > 0 ? `${hours}h ${rem}m` : `${rem} min`;
   };
 
-  const nextCountdown = nextFixture
-    ? getCountdown(nextFixture.kickOff)
-    : "No upcoming fixture";
-
-  const nextFixtureLabel = nextFixture
-    ? `${nextFixture.homeTeam} v ${nextFixture.awayTeam}`
-    : "—";
-
-  const nextFixtureTime =
-    nextFixture && nextFixture.kickOff
-      ? new Date(nextFixture.kickOff).toLocaleTimeString("en-GB", {
-          hour: "2-digit",
-          minute: "2-digit",
-        })
-      : "";
-
-  // Placeholder stats – swap for real data later
+  // Fake data until real stats added
   const topScorer = {
     name: "Vincent Aboubakar",
     goals: 5,
@@ -62,40 +45,41 @@ function TopInfoRow({ matches }) {
 
   const sectionStyle = {
     marginTop: "16px",
-    marginBottom: "8px",
+    marginBottom: "12px",
   };
 
-  const rowStyle = {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "8px",
+  const gridStyle = {
+    display: "grid",
+    gridTemplateColumns: "1fr",
+    gap: "10px",
+
+    /* Tablet & Desktop: 2x2 grid */
+    gridAutoRows: "1fr",
   };
 
   const cardBase = {
     borderRadius: "12px",
     border: "1px solid #1f2937",
     backgroundColor: "#020617",
-    padding: "10px 12px",
-    fontSize: "11px",
-    minWidth: "180px",
-    flex: "1 1 180px",
+    padding: "12px",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    gap: "4px",
+    gap: "6px",
+    minHeight: "100px", // all cards same height
   };
 
   const cardTitle = {
     textTransform: "uppercase",
     letterSpacing: "0.12em",
     fontWeight: 600,
-    color: "#9ca3af",
     fontSize: "10px",
+    color: "#9ca3af",
   };
 
   const mainText = {
     fontSize: "13px",
-    fontWeight: 500,
+    fontWeight: 600,
   };
 
   const subText = {
@@ -105,11 +89,11 @@ function TopInfoRow({ matches }) {
 
   const highlight = {
     fontSize: "11px",
-    color: "#22c55e",
     fontWeight: 600,
+    color: "#22c55e",
   };
 
-  const playerRow = {
+  const row = {
     display: "flex",
     alignItems: "center",
     gap: "8px",
@@ -118,121 +102,79 @@ function TopInfoRow({ matches }) {
   const badgeStyle = {
     width: "20px",
     height: "20px",
-    borderRadius: "999px",
+    borderRadius: "50%",
     objectFit: "cover",
-    backgroundColor: "#020617",
-  };
-
-  const playerTextCol = {
-    display: "flex",
-    flexDirection: "column",
-    gap: "2px",
-  };
-
-  const playerNameStyle = {
-    fontSize: "12px",
-    fontWeight: 600,
-  };
-
-  const playerCountryStyle = {
-    fontSize: "10px",
-    color: "#9ca3af",
   };
 
   const linkStyle = {
-    textDecoration: "none",
     color: "inherit",
+    textDecoration: "none",
   };
 
-  const joinCard = {
-    ...cardBase,
-    alignItems: "flex-start",
-  };
-
-  const joinTitle = {
-    ...cardTitle,
-    textTransform: "none",
-    letterSpacing: "0.06em",
-    color: "#e5e7eb",
-  };
-
-  const joinSub = {
-    fontSize: "10px",
-    color: "#9ca3af",
-  };
+  // Media query injection to match fixtures layout
+  const styleTag = `
+    @media (min-width: 640px) {
+      .top-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  `;
 
   return (
-    <section style={sectionStyle}>
-      <div style={rowStyle}>
-        {/* Box 1 – Next Kick-off */}
-        <div style={cardBase}>
-          <div style={cardTitle}>Next Kick-off</div>
-          <div style={mainText}>{nextFixtureLabel}</div>
-          {nextFixture && (
-            <>
-              <div style={subText}>{nextFixtureTime}</div>
-              <div style={highlight}>{nextCountdown}</div>
-            </>
-          )}
-          {!nextFixture && <div style={highlight}>{nextCountdown}</div>}
-        </div>
+    <>
+      <style>{styleTag}</style>
 
-        {/* Box 2 – Top Goalscorer */}
-        <div style={cardBase}>
-          <div style={cardTitle}>Top Goalscorer</div>
-          <div style={playerRow}>
-            {topScorer.badge && (
-              <img
-                src={topScorer.badge}
-                alt={topScorer.country}
-                style={badgeStyle}
-              />
+      <section style={sectionStyle}>
+        <div className="top-info-grid" style={gridStyle}>
+          {/* BOX 1 – Next Kick Off */}
+          <div style={cardBase}>
+            <div style={cardTitle}>Next Kick-off</div>
+            <div style={mainText}>
+              {nextFixture
+                ? `${nextFixture.homeTeam} v ${nextFixture.awayTeam}`
+                : "—"}
+            </div>
+            {nextFixture && (
+              <>
+                <div style={subText}>
+                  {new Date(nextFixture.kickOff).toLocaleTimeString("en-GB", {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </div>
+                <div style={highlight}>{getCountdown(nextFixture.kickOff)}</div>
+              </>
             )}
-            <div style={playerTextCol}>
-              <span style={playerNameStyle}>{topScorer.name}</span>
-              <span style={highlight}>{topScorer.goals} goals</span>
-              <span style={playerCountryStyle}>{topScorer.country}</span>
+          </div>
+
+          {/* BOX 2 – Top Goalscorer */}
+          <div style={cardBase}>
+            <div style={cardTitle}>Top Goalscorer</div>
+            <div style={row}>
+              <img src={topScorer.badge} style={badgeStyle} />
+              <div>
+                <div style={mainText}>{topScorer.name}</div>
+                <div style={highlight}>{topScorer.goals} goals</div>
+                <div style={subText}>{topScorer.country}</div>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Box 3 – Top Assists */}
-        <div style={cardBase}>
-          <div style={cardTitle}>Top Assists</div>
-          <div style={playerRow}>
-            {topAssist.badge && (
-              <img
-                src={topAssist.badge}
-                alt={topAssist.country}
-                style={badgeStyle}
-              />
-            )}
-            <div style={playerTextCol}>
-              <span style={playerNameStyle}>{topAssist.name}</span>
-              <span style={highlight}>{topAssist.assists} assists</span>
-              <span style={playerCountryStyle}>{topAssist.country}</span>
+          {/* BOX 3 – Top Assists */}
+          <div style={cardBase}>
+            <div style={cardTitle}>Top Assists</div>
+            <div style={row}>
+              <img src={topAssist.badge} style={badgeStyle} />
+              <div>
+                <div style={mainText}>{topAssist.name}</div>
+                <div style={highlight}>{topAssist.assists} assists</div>
+                <div style={subText}>{topAssist.country}</div>
+              </div>
             </div>
           </div>
-        </div>
 
-        {/* Box 4 – JoinStriver.com */}
-        <a
-          href="https://joinstriver.com"
-          target="_blank"
-          rel="noreferrer"
-          style={linkStyle}
-        >
-          <div style={joinCard}>
-            <div style={joinTitle}>JoinStriver.com</div>
-            <div style={joinSub}>
-              The football social app · Abuse free
-            </div>
-            <div style={highlight}>Tap to join the movement</div>
-          </div>
-        </a>
-      </div>
-    </section>
-  );
-}
-
-export default TopInfoRow;
+          {/* BOX 4 – JoinStriver.com */}
+          <a href="https://joinstriver.com" target="_blank" style={linkStyle}>
+            <div style={cardBase}>
+              <div style={mainText}>JoinStriver.com</div>
+              <div style={subText}>The Football Soci
