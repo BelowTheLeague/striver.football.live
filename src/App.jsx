@@ -10,6 +10,7 @@ import LiveNowStrip from "./components/LiveNowStrip";
 import FixturesList from "./components/FixturesList";
 import GroupsTable from "./components/GroupsTable";
 import TopInfoRow from "./components/TopInfoRow";
+import AfconHeader from "./components/AfconHeader";
 
 function App() {
   const allMatches = getAllMatches();
@@ -36,83 +37,19 @@ function App() {
     padding: "16px",
   };
 
-  const headerStyle = {
-    display: "flex",
-    flexDirection: "column",
-    gap: "4px",
-    marginBottom: "8px",
-  };
-
-  const titleRowStyle = {
-    display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
-    alignItems: "center",
-    gap: "8px",
-  };
-
-  const titleStyle = {
-    fontSize: "22px",
-    fontWeight: 700,
-  };
-
-  const subtitleStyle = {
-    fontSize: "12px",
-    color: "#9ca3af",
-  };
-
-  const navRowStyle = {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "6px",
-    marginTop: "6px",
-  };
-
-  const navChipStyle = {
-    fontSize: "11px",
-    padding: "4px 8px",
-    borderRadius: "999px",
-    border: "1px solid #1f2937",
-    backgroundColor: "#020617",
-    color: "#e5e7eb",
-    textTransform: "uppercase",
-    letterSpacing: "0.08em",
-  };
-
   return (
     <div style={pageStyle}>
       <div style={containerStyle}>
-        {/* Header / Nav */}
-        <header style={headerStyle}>
-          <div style={titleRowStyle}>
-            <div>
-              <h1 style={titleStyle}>AFCON 2025 Live Centre</h1>
-              <p style={subtitleStyle}>
-                Powered by Striver.Football · In partnership with BelowTheLeague
-              </p>
-            </div>
-            <div style={{ textAlign: "right", fontSize: "11px" }}>
-              <div>Live scores · Fixtures · Results</div>
-              <div style={{ color: "#9ca3af" }}>
-                Non league energy for AFCON
-              </div>
-            </div>
-          </div>
+        {/* New AFCON Header */}
+        <AfconHeader />
 
-          {/* Simple nav row */}
-          <div style={navRowStyle}>
-            <span style={navChipStyle}>Live</span>
-            <span style={navChipStyle}>Fixtures</span>
-            <span style={navChipStyle}>Results</span>
-            <span style={navChipStyle}>Tables</span>
-          </div>
-        </header>
-
-        {/* Top 4-box info row */}
+        {/* Top info row (next KO, top scorer, etc) */}
         <TopInfoRow matches={allMatches} />
 
         {/* Live logic */}
-        {hasSingleLive && <LiveNowStrip matches={live} layout="single" />}
+        {hasSingleLive && (
+          <LiveNowStrip matches={live} layout="single" />
+        )}
 
         {hasMultipleLive && (
           <>
