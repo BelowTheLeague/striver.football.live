@@ -10,7 +10,8 @@ export const reports = [
     stadium: "Abidjan Stadium",
     scoreline: "Morocco 1–0 Nigeria",
     group: "Group A",
-    heroImage: "/images/morocco-nigeria.jpg", // optional
+    // 1920x1080-style hero image (add this asset in /public/images)
+    heroImage: "/images/reports/morocco-nigeria-1920x1080.jpg",
     summary:
       "A disciplined Morocco side took three crucial points against Nigeria in the opening game of Group A.",
     body: `
@@ -29,7 +30,7 @@ The result leaves Morocco top of Group A and Nigeria with work to do in their re
     stadium: "Yamoussoukro Stadium",
     scoreline: "Ivory Coast 2–2 Ghana",
     group: "Group A",
-    heroImage: "/images/ivorycoast-ghana.jpg",
+    heroImage: "/images/reports/ivorycoast-ghana-1920x1080.jpg",
     summary:
       "Ivory Coast and Ghana shared the points in a classic AFCON group-stage battle.",
     body: `
