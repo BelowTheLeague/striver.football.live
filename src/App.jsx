@@ -2,7 +2,6 @@
 import React from "react";
 import {
   getAllMatches,
-  getFeaturedMatches,
   getFixtures,
   getLiveMatches,
 } from "./data/matches";
@@ -10,12 +9,18 @@ import FeaturedMatches from "./components/FeaturedMatches";
 import LiveNowStrip from "./components/LiveNowStrip";
 import FixturesList from "./components/FixturesList";
 import GroupsTable from "./components/GroupsTable";
+import TopInfoRow from "./components/TopInfoRow";
 
 function App() {
   const allMatches = getAllMatches();
-  const featured = getFeaturedMatches();
   const live = getLiveMatches();
   const fixtures = getFixtures();
+
+  const hasSingleLive = live.length === 1;
+  const hasMultipleLive = live.length >= 2;
+
+  // If 2 or 3 live matches, use the first one as featured
+  const featured = hasMultipleLive ? [live[0]] : [];
 
   const pageStyle = {
     minHeight: "100vh",
@@ -35,7 +40,7 @@ function App() {
     display: "flex",
     flexDirection: "column",
     gap: "4px",
-    marginBottom: "16px",
+    marginBottom: "8px",
   };
 
   const titleRowStyle = {
@@ -56,14 +61,14 @@ function App() {
     color: "#9ca3af",
   };
 
-  const chipRowStyle = {
+  const navRowStyle = {
     display: "flex",
     flexWrap: "wrap",
     gap: "6px",
     marginTop: "6px",
   };
 
-  const chipStyle = {
+  const navChipStyle = {
     fontSize: "11px",
     padding: "4px 8px",
     borderRadius: "999px",
@@ -77,6 +82,7 @@ function App() {
   return (
     <div style={pageStyle}>
       <div style={containerStyle}>
+        {/* Header / Nav */}
         <header style={headerStyle}>
           <div style={titleRowStyle}>
             <div>
@@ -93,16 +99,29 @@ function App() {
             </div>
           </div>
 
-          <div style={chipRowStyle}>
-            <span style={chipStyle}>Live</span>
-            <span style={chipStyle}>Fixtures</span>
-            <span style={chipStyle}>Results</span>
-            <span style={chipStyle}>Tables</span>
+          {/* Simple nav row */}
+          <div style={navRowStyle}>
+            <span style={navChipStyle}>Live</span>
+            <span style={navChipStyle}>Fixtures</span>
+            <span style={navChipStyle}>Results</span>
+            <span style={navChipStyle}>Tables</span>
           </div>
         </header>
 
-         <LiveNowStrip matches={allMatches} />
-        <FeaturedMatches matches={featured} />
+        {/* Top 4-box info row */}
+        <TopInfoRow matches={allMatches} />
+
+        {/* Live logic */}
+        {hasSingleLive && <LiveNowStrip matches={live} layout="single" />}
+
+        {hasMultipleLive && (
+          <>
+            <LiveNowStrip matches={live} layout="multi" />
+            <FeaturedMatches matches={featured} />
+          </>
+        )}
+
+        {/* Fixtures & Groups */}
         <FixturesList fixtures={fixtures} />
         <GroupsTable />
       </div>
