@@ -9,6 +9,7 @@ import {
 import FeaturedMatches from "./components/FeaturedMatches";
 import LiveNowStrip from "./components/LiveNowStrip";
 import FixturesList from "./components/FixturesList";
+import GroupsTable from "./components/GroupsTable";
 
 function App() {
   const allMatches = getAllMatches();
