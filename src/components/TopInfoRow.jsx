@@ -48,13 +48,12 @@ function TopInfoRow({ matches }) {
     marginBottom: "12px",
   };
 
+  // Mobile: 2 columns (2x2)
+  // Tablet & desktop: 4 columns (1x4)
   const gridStyle = {
     display: "grid",
-    gridTemplateColumns: "1fr",
+    gridTemplateColumns: "repeat(2, 1fr)", // mobile default
     gap: "10px",
-
-    /* Tablet & Desktop: 2x2 grid */
-    gridAutoRows: "1fr",
   };
 
   const cardBase = {
@@ -66,7 +65,7 @@ function TopInfoRow({ matches }) {
     flexDirection: "column",
     justifyContent: "center",
     gap: "6px",
-    minHeight: "100px", // all cards same height
+    minHeight: "100px", // equal height
   };
 
   const cardTitle = {
@@ -111,11 +110,11 @@ function TopInfoRow({ matches }) {
     textDecoration: "none",
   };
 
-  // Media query injection to match fixtures layout
+  // Media query for >= 768px: 4 columns (1 row)
   const styleTag = `
-    @media (min-width: 640px) {
+    @media (min-width: 768px) {
       .top-info-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(4, 1fr);
       }
     }
   `;
@@ -142,7 +141,9 @@ function TopInfoRow({ matches }) {
                     minute: "2-digit",
                   })}
                 </div>
-                <div style={highlight}>{getCountdown(nextFixture.kickOff)}</div>
+                <div style={highlight}>
+                  {getCountdown(nextFixture.kickOff)}
+                </div>
               </>
             )}
           </div>
@@ -151,7 +152,7 @@ function TopInfoRow({ matches }) {
           <div style={cardBase}>
             <div style={cardTitle}>Top Goalscorer</div>
             <div style={row}>
-              <img src={topScorer.badge} style={badgeStyle} />
+              <img src={topScorer.badge} style={badgeStyle} alt="" />
               <div>
                 <div style={mainText}>{topScorer.name}</div>
                 <div style={highlight}>{topScorer.goals} goals</div>
@@ -164,7 +165,7 @@ function TopInfoRow({ matches }) {
           <div style={cardBase}>
             <div style={cardTitle}>Top Assists</div>
             <div style={row}>
-              <img src={topAssist.badge} style={badgeStyle} />
+              <img src={topAssist.badge} style={badgeStyle} alt="" />
               <div>
                 <div style={mainText}>{topAssist.name}</div>
                 <div style={highlight}>{topAssist.assists} assists</div>
@@ -174,11 +175,11 @@ function TopInfoRow({ matches }) {
           </div>
 
           {/* BOX 4 – JoinStriver.com */}
-          <a href="https://joinstriver.com" target="_blank" style={linkStyle}>
+          <a href="https://joinstriver.com" target="_blank" rel="noreferrer" style={linkStyle}>
             <div style={cardBase}>
               <div style={mainText}>JoinStriver.com</div>
               <div style={subText}>The Football Social App</div>
-              <div style={highlight}>Tap to Join the Movement</div>
+              <div style={highlight}>Tap to join the movement</div>
             </div>
           </a>
         </div>
