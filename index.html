@@ -2,193 +2,347 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Striver.Football Live Centre</title>
+  <title>AFCON Live Centre | Striver.Football</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="header-logo left-logo">
-        <!-- Replace with your real Striver logo -->
+<header class="sf-header" id="sf-header">
+  <!-- TOP BRAND STRIP -->
+  <div class="sf-header-top">
+    <div class="sf-container sf-header-top-inner">
+      <div class="sf-header-logo sf-header-logo-left">
+        <!-- Striver logo -->
         <img src="striver-logo.png" alt="Striver.Football" />
       </div>
 
-      <div class="header-centre">
-        <div class="header-title">
-          AFCON 2025 Live Centre
-        </div>
-        <div class="header-subtitle">
-          Powered by <strong>BelowTheLeague.com</strong>
-        </div>
+      <div class="sf-header-centre">
+        <span class="sf-header-pill">AFCON 2025</span>
+        <span class="sf-header-title">AFCON Live Football Centre</span>
+        <span class="sf-header-subtitle">
+          Brought to you by <strong>Striver.Football</strong><br />
+          in partnership with <strong>BelowTheLeague.com</strong>
+        </span>
       </div>
 
-      <div class="header-logo right-logo">
-        <!-- Replace with your real BTL logo -->
+      <div class="sf-header-logo sf-header-logo-right">
+        <!-- BTL logo -->
         <img src="btl-logo.png" alt="BelowTheLeague" />
       </div>
-    </div>
 
-    <nav class="main-nav">
-      <ul>
-        <li><a href="#" class="active">Live</a></li>
-        <li><a href="#">Match Reports</a></li>
-        <li><a href="#">News</a></li>
-        <li><a href="#">Groups</a></li>
-        <li><a href="#">Tables</a></li>
+      <!-- MOBILE MENU BUTTON -->
+      <button class="sf-menu-toggle" id="sf-menu-toggle" aria-label="Open navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- NAV BAR (DESKTOP) -->
+  <nav class="sf-nav">
+    <div class="sf-container">
+      <ul class="sf-nav-list">
+        <li><a href="#" class="sf-nav-link sf-nav-link-active">Live Centre</a></li>
+        <li><a href="#reports" class="sf-nav-link">Match Reports</a></li>
+        <li><a href="#news" class="sf-nav-link">News</a></li>
+        <li><a href="#fixtures" class="sf-nav-link">Fixtures</a></li>
+        <li><a href="#tables" class="sf-nav-link">Tables</a></li>
       </ul>
-    </nav>
-  </header>
-
-  <!-- MAIN CONTENT -->
-  <main class="page">
-    <div class="page-inner">
-
-      <!-- LIVE MATCHES COLUMN -->
-      <section class="column">
-        <h2 class="section-title">Live matches</h2>
-
-        <div class="card live-card">
-          <div class="live-header">
-            <span class="live-pill">Live</span>
-            <span class="live-minute">67'</span>
-          </div>
-          <div class="live-teams">
-            <div class="team">
-              <span class="team-name">Morocco</span>
-              <span class="team-score">2</span>
-            </div>
-            <div class="team">
-              <span class="team-name">Nigeria</span>
-              <span class="team-score">1</span>
-            </div>
-          </div>
-          <div class="live-meta">
-            Group A • Matchday 3
-          </div>
-        </div>
-
-        <div class="card live-card">
-          <div class="live-header">
-            <span class="live-pill">Live</span>
-            <span class="live-minute">43'</span>
-          </div>
-          <div class="live-teams">
-            <div class="team">
-              <span class="team-name">Egypt</span>
-              <span class="team-score">1</span>
-            </div>
-            <div class="team">
-              <span class="team-name">Ghana</span>
-              <span class="team-score">0</span>
-            </div>
-          </div>
-          <div class="live-meta">
-            Group B • Matchday 2
-          </div>
-        </div>
-      </section>
-
-      <!-- MATCH REPORTS COLUMN -->
-      <section class="column">
-        <h2 class="section-title">Latest match reports</h2>
-
-        <!-- Hero image always at top of report -->
-        <article class="card report-card">
-          <div class="report-hero">
-            <!-- Placeholder hero image, swap for your VOD / thumb -->
-            <img src="https://picsum.photos/960/540?random=1" alt="Match report" />
-          </div>
-          <div class="card-body">
-            <div class="card-meta">
-              Group A • FT • MOR 2–1 NIG
-            </div>
-            <h3 class="card-title">
-              Morocco edge Nigeria late to book a place in the knockouts
-            </h3>
-            <p class="card-text">
-              A late winner sends the hosts through after a tight, physical ninety minutes
-              that never really settled down.
-            </p>
-            <div class="card-footer">
-              <span>By Striver Match Centre</span>
-              <span>Published 12 minutes ago</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="card report-card">
-          <div class="report-hero">
-            <img src="https://picsum.photos/960/540?random=2" alt="Match report" />
-          </div>
-          <div class="card-body">
-            <div class="card-meta">
-              Group B • FT • EGY 3–0 GHA
-            </div>
-            <h3 class="card-title">
-              Salah shines as Egypt send out a big statement
-            </h3>
-            <p class="card-text">
-              Two goals and one assist from the captain as Egypt cruise past Ghana and take
-              control of Group B.
-            </p>
-            <div class="card-footer">
-              <span>By BelowTheLeague</span>
-              <span>Today 18:05</span>
-            </div>
-          </div>
-        </article>
-      </section>
-
-      <!-- NEWS COLUMN -->
-      <section class="column">
-        <h2 class="section-title">News</h2>
-
-        <article class="card news-card">
-          <div class="news-image">
-            <img src="https://picsum.photos/400/400?random=3" alt="News" />
-          </div>
-          <div class="card-body">
-            <div class="news-header">
-              <span class="news-live-pill">
-                <span class="news-dot"></span>
-                Live
-              </span>
-              <span class="card-meta">Updated 2 minutes ago</span>
-            </div>
-            <h3 class="card-title">
-              Fan zones open early after record ticket demand
-            </h3>
-            <p class="card-text">
-              Extra big screens and more food options announced as supporters flood into
-              the host cities ahead of opening night.
-            </p>
-          </div>
-        </article>
-
-        <article class="card news-card">
-          <div class="news-image">
-            <img src="https://picsum.photos/400/400?random=4" alt="News" />
-          </div>
-          <div class="card-body">
-            <div class="news-header">
-              <span class="card-meta">Today 15:40</span>
-            </div>
-            <h3 class="card-title">
-              Street football and samba drums set the tone for AFCON
-            </h3>
-            <p class="card-text">
-              From drum lines to smoke flares, local fans bring colour and chaos in the
-              best possible way.
-            </p>
-          </div>
-        </article>
-
-      </section>
     </div>
-  </main>
+  </nav>
 
+  <!-- FULL SCREEN NAV OVERLAY (MOBILE) -->
+  <div class="sf-nav-overlay" id="sf-nav-overlay">
+    <button class="sf-nav-close" id="sf-nav-close" aria-label="Close navigation">&times;</button>
+    <ul class="sf-nav-overlay-list">
+      <li><a href="#" class="sf-nav-overlay-link sf-active">Live Centre</a></li>
+      <li><a href="#reports" class="sf-nav-overlay-link">Match Reports</a></li>
+      <li><a href="#news" class="sf-nav-overlay-link">News</a></li>
+      <li><a href="#fixtures" class="sf-nav-overlay-link">Fixtures</a></li>
+      <li><a href="#tables" class="sf-nav-overlay-link">Tables</a></li>
+    </ul>
+  </div>
+</header>
+
+<main class="sf-main">
+
+  <!-- HERO ROW -->
+  <section class="sf-hero">
+    <div class="sf-container sf-hero-inner">
+      <div class="sf-hero-copy">
+        <h1>Live from AFCON 2025</h1>
+        <p>
+          Real time scores, breaking updates, match reports and features from across
+          the tournament, curated by Striver.Football and BelowTheLeague.
+        </p>
+        <div class="sf-hero-meta">
+          <span class="sf-hero-pill">Every match covered</span>
+          <span class="sf-hero-pill">Safe, moderated football space</span>
+        </div>
+      </div>
+      <div class="sf-hero-card">
+        <h2>Live right now</h2>
+        <div class="sf-live-card">
+          <div class="sf-live-row">
+            <span class="sf-live-pill">Live</span>
+            <span class="sf-live-minute">67'</span>
+          </div>
+          <div class="sf-live-teams">
+            <div class="sf-live-team">
+              <span class="sf-team-name">Morocco</span>
+              <span class="sf-team-score">2</span>
+            </div>
+            <div class="sf-live-team">
+              <span class="sf-team-name">Nigeria</span>
+              <span class="sf-team-score">1</span>
+            </div>
+          </div>
+          <div class="sf-live-meta">Group A • Matchday 3 • Casablanca</div>
+        </div>
+
+        <div class="sf-live-card sf-live-card-secondary">
+          <div class="sf-live-row">
+            <span class="sf-live-pill sf-live-pill-soon">Next</span>
+            <span class="sf-live-minute">KO 20:00</span>
+          </div>
+          <div class="sf-live-teams">
+            <div class="sf-live-team">
+              <span class="sf-team-name">Senegal</span>
+            </div>
+            <div class="sf-live-team">
+              <span class="sf-team-name">Ghana</span>
+            </div>
+          </div>
+          <div class="sf-live-meta">Group C • Yamoussoukro</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN GRID -->
+  <section class="sf-container sf-grid">
+
+    <!-- LIVE FEED COLUMN -->
+    <section class="sf-col sf-col-live">
+      <h2 class="sf-section-title">Live text commentary</h2>
+
+      <article class="sf-live-feed">
+        <div class="sf-feed-header">
+          <span class="sf-feed-match">Morocco v Nigeria</span>
+          <span class="sf-feed-status">Live • 67'</span>
+        </div>
+        <ul class="sf-feed-list">
+          <li>
+            <span class="sf-feed-time">67'</span>
+            <p class="sf-feed-text">
+              Big chance for Nigeria. A deep cross finds the back post but the header
+              is straight at the keeper.
+            </p>
+          </li>
+          <li>
+            <span class="sf-feed-time">61'</span>
+            <p class="sf-feed-text">
+              Morocco slow the tempo and keep the ball in midfield, happy to draw
+              Nigeria onto them before breaking wide.
+            </p>
+          </li>
+          <li>
+            <span class="sf-feed-time">54'</span>
+            <p class="sf-feed-text">
+              Goal for Morocco. A low cutback is swept into the far corner and the
+              stadium explodes.
+            </p>
+          </li>
+          <li>
+            <span class="sf-feed-time">HT</span>
+            <p class="sf-feed-text">
+              Level at the break. End to end, frantic and full of noise inside the
+              host city.
+            </p>
+          </li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- MATCH REPORTS COLUMN -->
+    <section class="sf-col" id="reports">
+      <h2 class="sf-section-title">Latest match reports</h2>
+
+      <!-- REPORT CARD 1 (HERO IMAGE ALWAYS AT TOP) -->
+      <article class="sf-card sf-card-report">
+        <div class="sf-card-hero">
+          <img src="https://picsum.photos/1920/1080?random=11" alt="Match hero" />
+        </div>
+        <div class="sf-card-body">
+          <div class="sf-card-meta-row">
+            <span class="sf-card-meta">Group A • FT</span>
+            <span class="sf-card-meta-strong">MOR 2–1 NIG</span>
+          </div>
+          <h3 class="sf-card-title">
+            Morocco edge Nigeria in a frantic opener to light up AFCON 2025
+          </h3>
+          <p class="sf-card-text">
+            A late winner and a wall of sound under the lights in Casablanca as the
+            host nation start with three points.
+          </p>
+          <div class="sf-card-footer">
+            <span class="sf-card-author">By Striver Match Centre</span>
+            <span class="sf-card-time">Published 12 mins ago</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- REPORT CARD 2 -->
+      <article class="sf-card sf-card-report">
+        <div class="sf-card-hero">
+          <img src="https://picsum.photos/1920/1080?random=12" alt="Match hero" />
+        </div>
+        <div class="sf-card-body">
+          <div class="sf-card-meta-row">
+            <span class="sf-card-meta">Group B • FT</span>
+            <span class="sf-card-meta-strong">EGY 3–0 GHA</span>
+          </div>
+          <h3 class="sf-card-title">
+            Salah show as Egypt cruise past Ghana to take control of the group
+          </h3>
+          <p class="sf-card-text">
+            Two goals from the captain and a ruthless display move Egypt into a strong
+            position ahead of the final round of games.
+          </p>
+          <div class="sf-card-footer">
+            <span class="sf-card-author">By BelowTheLeague</span>
+            <span class="sf-card-time">Today • 18:05</span>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- NEWS COLUMN -->
+    <section class="sf-col" id="news">
+      <h2 class="sf-section-title">Tournament news</h2>
+
+      <!-- NEWS CARD WITH SIDE IMAGE + LIVE BEACON -->
+      <article class="sf-card sf-card-news">
+        <div class="sf-card-news-image">
+          <img src="https://picsum.photos/640/640?random=21" alt="News" />
+        </div>
+        <div class="sf-card-body">
+          <div class="sf-card-meta-row">
+            <span class="sf-live-badge">
+              <span class="sf-live-dot"></span>
+              Live
+            </span>
+            <span class="sf-card-time">Updated 2 mins ago</span>
+          </div>
+          <h3 class="sf-card-title">
+            Fan zones open early after record ticket demand across the host cities
+          </h3>
+          <p class="sf-card-text">
+            Extra big screens, more food vendors and extended hours as supporters
+            pour into fan parks from sunrise.
+          </p>
+        </div>
+      </article>
+
+      <!-- STATIC NEWS CARD -->
+      <article class="sf-card sf-card-news">
+        <div class="sf-card-news-image">
+          <img src="https://picsum.photos/640/640?random=22" alt="News" />
+        </div>
+        <div class="sf-card-body">
+          <div class="sf-card-meta-row">
+            <span class="sf-card-tag">Feature</span>
+            <span class="sf-card-time">Today • 15:40</span>
+          </div>
+          <h3 class="sf-card-title">
+            Street football, colour and drums: a day inside AFCON fan culture
+          </h3>
+          <p class="sf-card-text">
+            From painted faces to late night sing-songs, we follow one group of
+            supporters through a full matchday.
+          </p>
+        </div>
+      </article>
+
+    </section>
+  </section>
+
+  <!-- FIXTURES & TABLES ROW -->
+  <section class="sf-container sf-grid sf-grid-secondary" id="fixtures">
+    <section class="sf-col">
+      <h2 class="sf-section-title">Today’s fixtures</h2>
+      <div class="sf-card sf-card-list">
+        <ul class="sf-list">
+          <li>
+            <span class="sf-list-match">Senegal v Ghana</span>
+            <span class="sf-list-meta">Group C • 20:00</span>
+          </li>
+          <li>
+            <span class="sf-list-match">Ivory Coast v DR Congo</span>
+            <span class="sf-list-meta">Group D • 17:00</span>
+          </li>
+          <li>
+            <span class="sf-list-match">Cameroon v Mali</span>
+            <span class="sf-list-meta">Group E • 14:00</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="sf-col" id="tables">
+      <h2 class="sf-section-title">Group A table</h2>
+      <div class="sf-card sf-card-table">
+        <table>
+          <thead>
+            <tr>
+              <th>Team</th>
+              <th>P</th>
+              <th>GD</th>
+              <th>Pts</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Morocco</td>
+              <td>2</td>
+              <td>+3</td>
+              <td>6</td>
+            </tr>
+            <tr>
+              <td>Nigeria</td>
+              <td>2</td>
+              <td>+1</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>Egypt</td>
+              <td>2</td>
+              <td>-1</td>
+              <td>3</td>
+            </tr>
+            <tr>
+              <td>Guinea</td>
+              <td>2</td>
+              <td>-3</td>
+              <td>0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+
+</main>
+
+<footer class="sf-footer">
+  <div class="sf-container sf-footer-inner">
+    <p>
+      AFCON Live Football Centre by <strong>Striver.Football</strong> in partnership with
+      <strong>BelowTheLeague.com</strong> • Football social media, done safely.
+    </p>
+  </div>
+</footer>
+
+<script src="main.js"></script>
 </body>
 </html>
