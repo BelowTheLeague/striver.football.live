@@ -126,7 +126,7 @@ function LiveNowStrip({ matches, layout = "multi" }) {
     paddingTop: "8px",
     display: "flex",
     flexDirection: "column",
-    gap: "6px",
+    gap: "8px",
     fontSize: "11px",
   };
 
@@ -143,49 +143,66 @@ function LiveNowStrip({ matches, layout = "multi" }) {
   };
 
   const statLabelStyle = {
-    display: "flex",
-    justifyContent: "space-between",
-    color: "#9ca3af",
-  };
-
-  const statBarsWrapperStyle = {
-    display: "flex",
-    flexDirection: "column",
-    gap: "3px",
-  };
-
-  const statBarRowStyle = {
-    display: "flex",
-    alignItems: "center",
-    gap: "6px",
+    textAlign: "center",
+    color: "#e5e7eb",
+    fontSize: "11px",
+    fontWeight: 500,
   };
 
   const statBarOuterStyle = {
-    flex: 1,
-    height: "6px",
+    position: "relative",
+    width: "100%",
+    height: "10px",
     borderRadius: "999px",
-    backgroundColor: "#1f2937",
     overflow: "hidden",
+    backgroundColor: "#1f2937",
+  };
+
+  const statBarSegmentsStyle = {
+    display: "flex",
+    width: "100%",
+    height: "100%",
   };
 
   const statBarInnerHomeStyle = (widthPercent) => ({
-    width: `${widthPercent}%`,
+    flexBasis: `${widthPercent}%`,
     height: "100%",
     backgroundColor: "#22c55e",
   });
 
   const statBarInnerAwayStyle = (widthPercent) => ({
-    width: `${widthPercent}%`,
+    flexBasis: `${widthPercent}%`,
     height: "100%",
     backgroundColor: "#ef4444",
   });
 
-  const statValueStyle = {
-    minWidth: "24px",
-    textAlign: "right",
+  const statValueLeftStyle = {
+    position: "absolute",
+    left: "6px",
+    top: "50%",
+    transform: "translateY(-50%)",
+    fontSize: "10px",
+    fontWeight: 600,
+    color: "#f9fafb",
   };
 
-  // Helper to render one stat row with bars
+  const statValueRightStyle = {
+    position: "absolute",
+    right: "6px",
+    top: "50%",
+    transform: "translateY(-50%)",
+    fontSize: "10px",
+    fontWeight: 600,
+    color: "#f9fafb",
+  };
+
+  const formatValue = (label, value) => {
+    if (label.toLowerCase().includes("possession")) {
+      return `${value}%`;
+    }
+    return value;
+  };
+
   const renderStatRow = (label, homeValue, awayValue) => {
     const home = Number(homeValue) || 0;
     const away = Number(awayValue) || 0;
@@ -193,26 +210,19 @@ function LiveNowStrip({ matches, layout = "multi" }) {
     const homePct = total > 0 ? Math.round((home / total) * 100) : 0;
     const awayPct = total > 0 ? Math.round((away / total) * 100) : 0;
 
+    const homeDisplay = formatValue(label, home);
+    const awayDisplay = formatValue(label, away);
+
     return (
       <div style={statRowStyle}>
-        <div style={statLabelStyle}>
-          <span>{label}</span>
-        </div>
-        <div style={statBarsWrapperStyle}>
-          {/* Home row */}
-          <div style={statBarRowStyle}>
-            <div style={statBarOuterStyle}>
-              <div style={statBarInnerHomeStyle(homePct)} />
-            </div>
-            <span style={statValueStyle}>{home}</span>
+        <div style={statLabelStyle}>{label}</div>
+        <div style={statBarOuterStyle}>
+          <div style={statBarSegmentsStyle}>
+            <div style={statBarInnerHomeStyle(homePct)} />
+            <div style={statBarInnerAwayStyle(awayPct)} />
           </div>
-          {/* Away row */}
-          <div style={statBarRowStyle}>
-            <div style={statBarOuterStyle}>
-              <div style={statBarInnerAwayStyle(awayPct)} />
-            </div>
-            <span style={statValueStyle}>{away}</span>
-          </div>
+          <span style={statValueLeftStyle}>{homeDisplay}</span>
+          <span style={statValueRightStyle}>{awayDisplay}</span>
         </div>
       </div>
     );
@@ -221,7 +231,9 @@ function LiveNowStrip({ matches, layout = "multi" }) {
   return (
     <section style={sectionStyle}>
       <div style={headerStyle}>
-        <h2 style={titleStyle}>{isSingleLayout ? "Live Match" : "Live Matches"}</h2>
+        <h2 style={titleStyle}>
+          {isSingleLayout ? "Live Match" : "Live Matches"}
+        </h2>
         <span style={countStyle}>
           {live.length} match{live.length !== 1 && "es"}
         </span>
@@ -290,61 +302,3 @@ function LiveNowStrip({ matches, layout = "multi" }) {
                   <span>
                     Pos: {s.groupPositionAway || "-"} ({match.awayTeam})
                   </span>
-                </div>
-
-                {/* Possession */}
-                {renderStatRow(
-                  "Possession (%)",
-                  s.possessionHome,
-                  s.possessionAway
-                )}
-
-                {/* Shots on target */}
-                {renderStatRow(
-                  "Shots on Target",
-                  s.shotsOnTargetHome,
-                  s.shotsOnTargetAway
-                )}
-
-                {/* Shots off target */}
-                {renderStatRow(
-                  "Shots off Target",
-                  s.shotsOffTargetHome,
-                  s.shotsOffTargetAway
-                )}
-
-                {/* Corners */}
-                {renderStatRow("Corners", s.cornersHome, s.cornersAway)}
-
-                {/* Free kicks */}
-                {renderStatRow(
-                  "Free Kicks",
-                  s.freeKicksHome,
-                  s.freeKicksAway
-                )}
-
-                {/* Yellow cards – only if any */}
-                {showYellows &&
-                  renderStatRow(
-                    "Yellow Cards",
-                    s.yellowCardsHome,
-                    s.yellowCardsAway
-                  )}
-
-                {/* Red cards – only if any */}
-                {showReds &&
-                  renderStatRow(
-                    "Red Cards",
-                    s.redCardsHome,
-                    s.redCardsAway
-                  )}
-              </div>
-            </article>
-          );
-        })}
-      </div>
-    </section>
-  );
-}
-
-export default LiveNowStrip;
