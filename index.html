@@ -1,14 +1,220 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>AFCON Live Centre | Striver</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- If you have a specific Striver font, drop the Google Font link here -->
-    <!-- <link rel="stylesheet" href="..."> -->
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <title>Striver.Football Live Centre</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="sf-body">
+
+  <!-- TOP SOCIAL STRIP -->
+  <header class="sf-header">
+    <div class="sf-header-top">
+      <div class="sf-container sf-header-top-inner">
+        <span class="sf-header-tagline">Football. Safe. Live.</span>
+        <div class="sf-header-social">
+          <!-- Replace # with your links -->
+          <a href="#" aria-label="Facebook" class="sf-social-icon">
+            <i class="icon-facebook"></i>
+          </a>
+          <a href="#" aria-label="Instagram" class="sf-social-icon">
+            <i class="icon-instagram"></i>
+          </a>
+          <a href="#" aria-label="X" class="sf-social-icon">
+            <i class="icon-x"></i>
+          </a>
+          <a href="#" aria-label="YouTube" class="sf-social-icon">
+            <i class="icon-youtube"></i>
+          </a>
+          <a href="#" aria-label="WhatsApp" class="sf-social-icon">
+            <i class="icon-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN BRAND STRIP -->
+    <div class="sf-header-main">
+      <div class="sf-container sf-header-main-inner">
+        <div class="sf-header-logo sf-header-logo-left">
+          <!-- Striver logo PNG -->
+          <img src="/assets/striver-logo.png" alt="Striver.Football" />
+        </div>
+
+        <div class="sf-header-centre">
+          <span class="sf-live-pill">LIVE</span>
+          <span class="sf-header-centre-text">
+            AFCON 2025 Live Centre
+            <span class="sf-header-sub">
+              Powered by <strong>BelowTheLeague.com</strong>
+            </span>
+          </span>
+        </div>
+
+        <div class="sf-header-logo sf-header-logo-right">
+          <!-- BTL logo PNG (icon or favicon style) -->
+          <img src="/assets/btl-logo.png" alt="BelowTheLeague" />
+        </div>
+
+        <!-- MOBILE MENU BUTTON -->
+        <button class="sf-menu-toggle" aria-label="Open navigation">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav class="sf-nav">
+      <div class="sf-container sf-nav-inner">
+        <ul class="sf-nav-list">
+          <li><a href="#" class="sf-nav-link sf-nav-link-active">Live Centre</a></li>
+          <li><a href="#" class="sf-nav-link">Match Reports</a></li>
+          <li><a href="#" class="sf-nav-link">News</a></li>
+          <li><a href="#" class="sf-nav-link">Groups & Tables</a></li>
+          <li><a href="#" class="sf-nav-link">Clubs</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- FULL SCREEN NAV OVERLAY (MOBILE) -->
+    <div class="sf-nav-overlay">
+      <button class="sf-nav-close" aria-label="Close navigation">&times;</button>
+      <ul class="sf-nav-overlay-list">
+        <li><a href="#" class="sf-nav-overlay-link sf-active">Live Centre</a></li>
+        <li><a href="#" class="sf-nav-overlay-link">Match Reports</a></li>
+        <li><a href="#" class="sf-nav-overlay-link">News</a></li>
+        <li><a href="#" class="sf-nav-overlay-link">Groups & Tables</a></li>
+        <li><a href="#" class="sf-nav-overlay-link">Clubs</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- PAGE CONTENT WRAPPER -->
+  <main class="sf-main">
+    <div class="sf-container sf-layout">
+      <!-- LEFT COLUMN: MATCH REPORTS -->
+      <section class="sf-column">
+        <h2 class="sf-section-title">Latest Match Reports</h2>
+
+        <!-- MATCH REPORT CARD WITH HERO IMAGE -->
+        <article class="sf-card sf-card-match">
+          <div class="sf-card-hero">
+            <!-- 1920x1080 placeholder, will crop -->
+            <img src="https://picsum.photos/1920/1080?random=1" alt="Match hero" />
+            <div class="sf-card-hero-overlay">
+              <span class="sf-card-tag">Isthmian North</span>
+              <span class="sf-card-minute">FT</span>
+            </div>
+          </div>
+          <div class="sf-card-body">
+            <div class="sf-card-meta-row">
+              <span class="sf-card-meta">Group A • Matchday 3</span>
+              <span class="sf-card-meta-strong">MOR 2–1 NIG</span>
+            </div>
+            <h3 class="sf-card-title">
+              Morocco edge Nigeria in late drama to top the group
+            </h3>
+            <p class="sf-card-text">
+              A ninety first minute winner sent the host nation into the knockouts
+              and turned Casablanca into one huge street party.
+            </p>
+            <div class="sf-card-footer">
+              <span class="sf-card-author">By Jack Shaw</span>
+              <span class="sf-card-time">Published 12 mins ago</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- SECOND MATCH REPORT CARD -->
+        <article class="sf-card sf-card-match sf-card-match--compact">
+          <div class="sf-card-hero">
+            <img src="https://picsum.photos/1920/1080?random=2" alt="Match hero" />
+          </div>
+          <div class="sf-card-body">
+            <div class="sf-card-meta-row">
+              <span class="sf-card-meta">Group B</span>
+              <span class="sf-card-meta-strong">EGY 3–0 GHA</span>
+            </div>
+            <h3 class="sf-card-title">
+              Salah masterclass as Egypt send a message to the rest of AFCON
+            </h3>
+            <div class="sf-card-footer">
+              <span class="sf-card-author">By BTL Match Centre</span>
+              <span class="sf-card-time">36 mins ago</span>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <!-- RIGHT COLUMN: NEWS + LIVE BEACON -->
+      <section class="sf-column">
+        <h2 class="sf-section-title">Tournament News</h2>
+
+        <!-- NEWS ARTICLE CARD WITH SIDE IMAGE + LIVE BEACON -->
+        <article class="sf-card sf-card-news">
+          <div class="sf-card-news-image">
+            <!-- square placeholder -->
+            <img src="https://picsum.photos/600/600?random=3" alt="News image" />
+          </div>
+          <div class="sf-card-body">
+            <div class="sf-card-meta-row">
+              <span class="sf-live-beacon">
+                <span class="sf-live-dot"></span>
+                LIVE
+              </span>
+              <span class="sf-card-time">Updated 2 mins ago</span>
+            </div>
+            <h3 class="sf-card-title">
+              Host city fan zones open early after record ticket demand
+            </h3>
+            <p class="sf-card-text">
+              Extra screens, food vendors and security have been drafted in as
+              supporters flood into Casablanca for opening weekend.
+            </p>
+          </div>
+        </article>
+
+        <!-- STATIC NEWS CARD -->
+        <article class="sf-card sf-card-news">
+          <div class="sf-card-news-image">
+            <img src="https://picsum.photos/600/600?random=4" alt="News image" />
+          </div>
+          <div class="sf-card-body">
+            <div class="sf-card-meta-row">
+              <span class="sf-card-tag sf-card-tag--outline">Feature</span>
+              <span class="sf-card-time">Today, 10:14</span>
+            </div>
+            <h3 class="sf-card-title">
+              Street football, colour and chaos: inside AFCON fan culture
+            </h3>
+            <p class="sf-card-text">
+              From drummers to face painters, we spent a day with the people who
+              turn every group game into a carnival.
+            </p>
+          </div>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    // Simple JS for mobile nav toggle
+    const menuToggle = document.querySelector('.sf-menu-toggle');
+    const navOverlay = document.querySelector('.sf-nav-overlay');
+    const navClose = document.querySelector('.sf-nav-close');
+
+    if (menuToggle && navOverlay) {
+      menuToggle.addEventListener('click', () => {
+        navOverlay.classList.add('sf-nav-overlay--open');
+        document.body.classList.add('sf-no-scroll');
+      });
+
+      navClose.addEventListener('click', () => {
+        navOverlay.classList.remove('sf-nav-overlay--open');
+        document.body.classList.remove('sf-no-scroll');
+      });
+    }
+  </script>
+</body>
 </html>
