@@ -174,18 +174,53 @@ function TopInfoRow({ matches }) {
             </div>
           </div>
 
-          {/* BOX 4 – JoinStriver.com */}
-          <a href="https://joinstriver.com" target="_blank" rel="noreferrer" style={linkStyle}>
-            <div style={cardBase}>
-              <div style={mainText}>JoinStriver.com</div>
-              <div style={subText}>The Football Social App</div>
-              <div style={highlight}>Tap to join the movement</div>
-            </div>
-          </a>
-        </div>
-      </section>
-    </>
-  );
-}
+          {/* BOX 4 – JoinStriver.com (Highlighted Box) */}
+<a href="https://joinstriver.com" target="_blank" rel="noreferrer" style={linkStyle}>
+  <div
+    style={{
+      ...cardBase,
+      backgroundColor: "#22c55e", // bright green
+      border: "1px solid #16a34a",
+      color: "black",
+    }}
+  >
+    {/* JoinStriver.com – bold, black, italic */}
+    <div
+      style={{
+        fontSize: "15px",
+        fontWeight: 700,
+        fontStyle: "italic",
+      }}
+    >
+      JoinStriver.com
+    </div>
+
+    {/* Join the AFCON chat – white, small, all caps */}
+    <div
+      style={{
+        fontSize: "10px",
+        fontWeight: 600,
+        textTransform: "uppercase",
+        color: "white",
+        marginTop: "2px",
+      }}
+    >
+      Join The AFCON Chat
+    </div>
+
+    {/* Striver.Football – bold, black, italic */}
+    <div
+      style={{
+        fontSize: "13px",
+        fontWeight: 700,
+        fontStyle: "italic",
+        color: "black",
+        marginTop: "6px",
+      }}
+    >
+      Striver.Football
+    </div>
+  </div>
+</a>
 
 export default TopInfoRow;
