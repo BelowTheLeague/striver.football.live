@@ -1,7 +1,7 @@
 // src/components/AfconHeader.jsx
 import React from "react";
 
-function AfconHeader() {
+function AfconHeader({ onNavChange }) {
   const wrapperStyle = {
     marginBottom: "12px",
     borderBottom: "1px solid #111827",
@@ -46,7 +46,7 @@ function AfconHeader() {
     color: "#9ca3af",
   };
 
-  // MIDDLE ROW – SCROLLING FEATURE CARDS
+  // MIDDLE ROW – FEATURE CARDS
   const middleRowWrapperStyle = {
     marginTop: "10px",
     marginBottom: "8px",
@@ -74,7 +74,7 @@ function AfconHeader() {
   const cardInnerStyle = {
     position: "relative",
     padding: "10px 12px",
-    height: "100px", // close to 16:9 on these widths
+    height: "100px",
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
@@ -192,12 +192,15 @@ function AfconHeader() {
     textDecoration: "none",
   };
 
+  const handleNavClick = (page) => {
+    if (onNavChange) onNavChange(page);
+  };
+
   return (
     <header style={wrapperStyle}>
       {/* TOP ROW */}
       <div style={topRowStyle}>
         <div style={logoRowStyle}>
-          {/* Striver logo */}
           <img
             src="/logos/striver.png"
             alt="Striver.Football"
@@ -240,12 +243,42 @@ function AfconHeader() {
       {/* BOTTOM ROW – NAV + SOCIAL */}
       <div style={bottomRowStyle}>
         <nav style={navItemsRowStyle}>
-          <span style={navItemStyle}>Live Games</span>
-          <span style={navItemStyle}>Fixtures</span>
-          <span style={navItemStyle}>Results</span>
-          <span style={navItemStyle}>Tables</span>
-          <span style={navItemStyle}>Reports</span>
-          <span style={navItemStyle}>News</span>
+          <span
+            style={navItemStyle}
+            onClick={() => handleNavClick("live")}
+          >
+            Live Games
+          </span>
+          <span
+            style={navItemStyle}
+            onClick={() => handleNavClick("fixtures")}
+          >
+            Fixtures
+          </span>
+          <span
+            style={navItemStyle}
+            onClick={() => handleNavClick("results")}
+          >
+            Results
+          </span>
+          <span
+            style={navItemStyle}
+            onClick={() => handleNavClick("tables")}
+          >
+            Tables
+          </span>
+          <span
+            style={navItemStyle}
+            onClick={() => handleNavClick("reports")}
+          >
+            Reports
+          </span>
+          <span
+            style={navItemStyle}
+            onClick={() => handleNavClick("news")}
+          >
+            News
+          </span>
         </nav>
 
         <div style={socialRowStyle}>
