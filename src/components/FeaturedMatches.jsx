@@ -1,3 +1,4 @@
+// src/components/FeaturedMatches.jsx
 import React from "react";
 
 function FeaturedMatches({ matches }) {
@@ -77,15 +78,21 @@ function FeaturedMatches({ matches }) {
     color: "#22c55e",
   };
 
+  const getStatusLabel = (match) => {
+    if (match.status === "live") return `${match.minute}' Live`;
+    if (match.status === "finished") return "Full Time";
+    return "Kick-off";
+  };
+
   return (
-    <section>
+    <section style={{ marginTop: "24px" }}>
       <h2
         style={{
           fontSize: "13px",
           textTransform: "uppercase",
           letterSpacing: "0.12em",
-          color: "#9ca3af",
-          marginTop: "8px",
+          fontWeight: 600,
+          marginBottom: "8px",
         }}
       >
         Featured Matches
@@ -101,35 +108,33 @@ function FeaturedMatches({ matches }) {
             <div style={teamsRowStyle}>
               {/* Home */}
               <div style={teamColumnStyle}>
-                <img
-                  src={match.homeBadge}
-                  alt={match.homeTeam}
-                  style={badgeStyle}
-                />
+                {match.homeBadge && (
+                  <img
+                    src={match.homeBadge}
+                    alt={match.homeTeam}
+                    style={badgeStyle}
+                  />
+                )}
                 <span style={teamNameStyle}>{match.homeTeam}</span>
               </div>
 
-              {/* Centre score/time */}
+              {/* Centre */}
               <div style={centreStyle}>
                 <div style={scoreStyle}>
                   {match.homeScore}–{match.awayScore}
                 </div>
-                <div style={statusStyle}>
-                  {match.status === "live"
-                    ? `${match.minute}' Live`
-                    : match.status === "finished"
-                    ? "Full Time"
-                    : "Kick-off"}
-                </div>
+                <div style={statusStyle}>{getStatusLabel(match)}</div>
               </div>
 
               {/* Away */}
               <div style={teamColumnStyle}>
-                <img
-                  src={match.awayBadge}
-                  alt={match.awayTeam}
-                  style={badgeStyle}
-                />
+                {match.awayBadge && (
+                  <img
+                    src={match.awayBadge}
+                    alt={match.awayTeam}
+                    style={badgeStyle}
+                  />
+                )}
                 <span style={teamNameStyle}>{match.awayTeam}</span>
               </div>
             </div>
