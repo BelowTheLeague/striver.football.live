@@ -1,3 +1,4 @@
+// src/components/FixturesList.jsx
 import React from "react";
 
 function FixturesList({ fixtures }) {
@@ -27,7 +28,7 @@ function FixturesList({ fixtures }) {
     flexDirection: "column",
     gap: "4px",
     padding: "10px 12px",
-    borderBottom: "1px solid "#111827",
+    borderBottom: "1px solid #111827",
     fontSize: "13px",
   };
 
