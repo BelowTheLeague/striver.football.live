@@ -1,34 +1,10 @@
-// src/data/matches.ts
+// src/data/matches.js
 
-export type MatchStatus = "not_started" | "live" | "finished";
-
-export interface Match {
-  id: string;
-  tournament: "AFCON_2025";
-  group: string; // e.g. "Group A" or "Quarter Finals"
-  stage: "Group" | "Quarter Final" | "Semi Final" | "Final";
-
-  homeTeam: string;
-  homeBadge: string;
-  awayTeam: string;
-  awayBadge: string;
-
-  homeScore: number | null;
-  awayScore: number | null;
-
-  minute: number | null; // null when not started or finished
-  status: MatchStatus;
-
-  stadium: string;
-  city: string;
-
-  // ISO string in UTC – adjust dates/times as needed
-  kickOff: string;
-}
+// Simple JS data model – no TypeScript, no types, just objects.
 
 // ---- CORE DATA ----
 
-export const matches: Match[] = [
+export const matches = [
   // GROUP A
   {
     id: "afcon-2025-g1-1",
@@ -210,18 +186,18 @@ export const matches: Match[] = [
   },
 ];
 
-// ---- SIMPLE HELPERS (so App.jsx stays clean) ----
+// ---- SIMPLE HELPERS ----
 
-export const getAllMatches = (): Match[] => matches;
+export const getAllMatches = () => matches;
 
-export const getLiveMatches = (): Match[] =>
+export const getLiveMatches = () =>
   matches.filter((m) => m.status === "live");
 
-export const getFixtures = (): Match[] =>
+export const getFixtures = () =>
   matches.filter((m) => m.status === "not_started");
 
 // Max 2 featured if 6+ total, else 1 – only from live games
-export const getFeaturedMatches = (): Match[] => {
+export const getFeaturedMatches = () => {
   const live = getLiveMatches();
   const total = matches.length;
 
