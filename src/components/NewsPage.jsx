@@ -13,7 +13,7 @@ function NewsPage({ selectedId, onSelect }) {
 
   const layoutStyle = {
     display: "grid",
-    gridTemplateColumns: "1.4fr 1fr",
+    gridTemplateColumns: "1.5fr 1fr",
     gap: "16px",
   };
 
@@ -21,27 +21,65 @@ function NewsPage({ selectedId, onSelect }) {
     borderRadius: "12px",
     border: "1px solid #1f2937",
     backgroundColor: "#020617",
-    padding: "16px",
+    overflow: "hidden",
+    boxShadow: "0 10px 20px rgba(0,0,0,0.45)",
+  };
+
+  const heroWrapperStyle = {
+    width: "100%",
+    height: "220px",
+    overflow: "hidden",
+    backgroundColor: "#111827",
+  };
+
+  const heroImageStyle = {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    display: "block",
+  };
+
+  const leftInnerStyle = {
+    padding: "14px 16px 16px 16px",
   };
 
   const rightStyle = {
     display: "flex",
     flexDirection: "column",
-    gap: "10px",
+    gap: "8px",
   };
 
   const listCardStyle = {
     borderRadius: "10px",
     border: "1px solid #1f2937",
     backgroundColor: "#020617",
-    padding: "10px 12px",
+    padding: "8px 10px",
     cursor: "pointer",
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
     fontSize: "11px",
   };
 
   const activeListCardStyle = {
     ...listCardStyle,
     borderColor: "#22c55e",
+  };
+
+  const thumbWrapperStyle = {
+    width: "52px",
+    height: "52px",
+    borderRadius: "8px",
+    overflow: "hidden",
+    backgroundColor: "#111827",
+    flexShrink: 0,
+  };
+
+  const thumbStyle = {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    display: "block",
   };
 
   const titleStyle = {
@@ -76,21 +114,33 @@ function NewsPage({ selectedId, onSelect }) {
         Latest News
       </h2>
       <div style={layoutStyle}>
-        {/* LEFT – ACTIVE NEWS */}
+        {/* LEFT – ACTIVE NEWS WITH BIG IMAGE */}
         <article style={leftStyle}>
-          <h3 style={titleStyle}>{activeNews.title}</h3>
-          <div style={metaStyle}>
-            {new Date(activeNews.date).toLocaleString("en-GB", {
-              day: "2-digit",
-              month: "short",
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
+          <div style={heroWrapperStyle}>
+            <img
+              src={
+                activeNews.image ||
+                "/images/news/placeholder-news-square.jpg"
+              }
+              alt={activeNews.title}
+              style={heroImageStyle}
+            />
           </div>
-          <div style={bodyStyle}>{activeNews.blurb}</div>
+          <div style={leftInnerStyle}>
+            <h3 style={titleStyle}>{activeNews.title}</h3>
+            <div style={metaStyle}>
+              {new Date(activeNews.date).toLocaleString("en-GB", {
+                day: "2-digit",
+                month: "short",
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </div>
+            <div style={bodyStyle}>{activeNews.blurb}</div>
+          </div>
         </article>
 
-        {/* RIGHT – LIST */}
+        {/* RIGHT – LIST OF NEWS ITEMS WITH THUMBS */}
         <aside style={rightStyle}>
           {all.map((item) => (
             <div
@@ -102,16 +152,28 @@ function NewsPage({ selectedId, onSelect }) {
               }
               onClick={() => onSelect(item.id)}
             >
-              <div style={{ fontWeight: 600, marginBottom: "2px" }}>
-                {item.title}
+              <div style={thumbWrapperStyle}>
+                <img
+                  src={
+                    item.image ||
+                    "/images/news/placeholder-news-square.jpg"
+                  }
+                  alt={item.title}
+                  style={thumbStyle}
+                />
               </div>
-              <div style={{ fontSize: "10px", color: "#9ca3af" }}>
-                {new Date(item.date).toLocaleString("en-GB", {
-                  day: "2-digit",
-                  month: "short",
-                  hour: "2-digit",
-                  minute: "2-digit",
-                })}
+              <div style={{ flex: 1 }}>
+                <div style={{ fontWeight: 600, marginBottom: "2px" }}>
+                  {item.title}
+                </div>
+                <div style={{ fontSize: "10px", color: "#9ca3af" }}>
+                  {new Date(item.date).toLocaleString("en-GB", {
+                    day: "2-digit",
+                    month: "short",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </div>
               </div>
             </div>
           ))}
