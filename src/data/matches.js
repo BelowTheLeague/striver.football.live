@@ -1,6 +1,8 @@
 // src/data/matches.js
 
-// Basic AFCON-style fixtures with statuses for the UI
+// Using national flags from flagcdn.com (w80 wide PNGs)
+// ISO country codes are lowercase: https://flagcdn.com/w80/{code}.png
+
 export const matches = [
   {
     id: "mor-nig-2025-01-11",
@@ -15,12 +17,12 @@ export const matches = [
     awayScore: 0,
     status: "live", // "live" | "finished" | "not_started"
     minute: 55,
-    homeBadge: "/badges/morocco.png",
-    awayBadge: "/badges/nigeria.png",
+    homeBadge: "https://flagcdn.com/w80/ma.png",
+    awayBadge: "https://flagcdn.com/w80/ng.png",
     isFeatured: true,
   },
   {
-    id: "civ-ghi-2025-01-11",
+    id: "civ-gha-2025-01-11",
     date: "2025-01-11",
     kickOff: "2025-01-11T17:00:00Z",
     stadium: "Yamoussoukro Stadium",
@@ -32,8 +34,8 @@ export const matches = [
     awayScore: 2,
     status: "finished",
     minute: 90,
-    homeBadge: "/badges/ivory-coast.png",
-    awayBadge: "/badges/ghana.png",
+    homeBadge: "https://flagcdn.com/w80/ci.png",
+    awayBadge: "https://flagcdn.com/w80/gh.png",
     isFeatured: true,
   },
   {
@@ -49,8 +51,8 @@ export const matches = [
     awayScore: 0,
     status: "not_started",
     minute: 0,
-    homeBadge: "/badges/senegal.png",
-    awayBadge: "/badges/tunisia.png",
+    homeBadge: "https://flagcdn.com/w80/sn.png",
+    awayBadge: "https://flagcdn.com/w80/tn.png",
     isFeatured: true,
   },
   {
@@ -66,8 +68,8 @@ export const matches = [
     awayScore: 0,
     status: "not_started",
     minute: 0,
-    homeBadge: "/badges/egypt.png",
-    awayBadge: "/badges/cameroon.png",
+    homeBadge: "https://flagcdn.com/w80/eg.png",
+    awayBadge: "https://flagcdn.com/w80/cm.png",
     isFeatured: false,
   },
   {
@@ -78,13 +80,13 @@ export const matches = [
     stage: "Group C",
     group: "Group C",
     homeTeam: "Algeria",
-    awayTeam: "Morocco",
+    awayTeam: "South Africa",
     homeScore: 0,
     awayScore: 0,
     status: "not_started",
     minute: 0,
-    homeBadge: "/badges/algeria.png",
-    awayBadge: "/badges/morocco.png",
+    homeBadge: "https://flagcdn.com/w80/dz.png",
+    awayBadge: "https://flagcdn.com/w80/za.png",
     isFeatured: true,
   },
   {
@@ -100,8 +102,8 @@ export const matches = [
     awayScore: 0,
     status: "not_started",
     minute: 0,
-    homeBadge: "/badges/nigeria.png",
-    awayBadge: "/badges/ghana.png",
+    homeBadge: "https://flagcdn.com/w80/ng.png",
+    awayBadge: "https://flagcdn.com/w80/gh.png",
     isFeatured: false,
   },
 ];
@@ -114,6 +116,7 @@ export const getLiveMatches = () =>
 export const getFixtures = () =>
   matches.filter((m) => m.status === "not_started");
 
+// Max 2 featured if 6+ total, else 1 – only from live games
 export const getFeaturedMatches = () => {
   const live = getLiveMatches();
   const total = matches.length;
