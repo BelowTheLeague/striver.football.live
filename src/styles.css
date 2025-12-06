@@ -1141,3 +1141,18 @@ body {
 .focus-list li + li {
   margin-top: 0.3rem;
 }
+
+/* Group standings responsive grid */
+.groups-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* mobile: 1 column */
+  gap: 12px;
+}
+
+/* Tablet and small desktop: 3 columns (2 rows for 6 groups) */
+@media (min-width: 768px) {
+  .groups-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
