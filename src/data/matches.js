@@ -1,11 +1,11 @@
-// data/matches.ts
+// src/data/matches.ts
 
 export type MatchStatus = "not_started" | "live" | "finished";
 
 export interface Match {
   id: string;
   tournament: "AFCON_2025";
-  group: string; // e.g. "Group A"
+  group: string; // e.g. "Group A" or "Quarter Finals"
   stage: "Group" | "Quarter Final" | "Semi Final" | "Final";
 
   homeTeam: string;
@@ -22,9 +22,11 @@ export interface Match {
   stadium: string;
   city: string;
 
-  // ISO string in UTC – adjust as needed
+  // ISO string in UTC – adjust dates/times as needed
   kickOff: string;
 }
+
+// ---- CORE DATA ----
 
 export const matches: Match[] = [
   // GROUP A
@@ -171,7 +173,7 @@ export const matches: Match[] = [
     kickOff: "2025-07-13T16:00:00Z",
   },
 
-  // SAMPLE KNOCKOUTS
+  // KNOCKOUTS (EXAMPLE)
   {
     id: "afcon-2025-qf-1",
     tournament: "AFCON_2025",
@@ -207,3 +209,24 @@ export const matches: Match[] = [
     kickOff: "2025-07-20T16:00:00Z",
   },
 ];
+
+// ---- SIMPLE HELPERS (so App.jsx stays clean) ----
+
+export const getAllMatches = (): Match[] => matches;
+
+export const getLiveMatches = (): Match[] =>
+  matches.filter((m) => m.status === "live");
+
+export const getFixtures = (): Match[] =>
+  matches.filter((m) => m.status === "not_started");
+
+// Max 2 featured if 6+ total, else 1 – only from live games
+export const getFeaturedMatches = (): Match[] => {
+  const live = getLiveMatches();
+  const total = matches.length;
+
+  if (!live.length) return [];
+  const maxFeatured = total >= 6 ? 2 : 1;
+
+  return live.slice(0, maxFeatured);
+};
