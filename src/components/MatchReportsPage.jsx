@@ -18,7 +18,7 @@ function MatchReportsPage({ selectedId, onSelect }) {
 
   const layoutStyle = {
     display: "grid",
-    gridTemplateColumns: "1.4fr 1fr",
+    gridTemplateColumns: "1.5fr 1fr",
     gap: "16px",
   };
 
@@ -26,7 +26,25 @@ function MatchReportsPage({ selectedId, onSelect }) {
     borderRadius: "12px",
     border: "1px solid #1f2937",
     backgroundColor: "#020617",
-    padding: "16px",
+    overflow: "hidden",
+    boxShadow: "0 10px 20px rgba(0,0,0,0.45)",
+  };
+
+  const heroImageWrapperStyle = {
+    width: "100%",
+    position: "relative",
+    overflow: "hidden",
+  };
+
+  const heroImageStyle = {
+    width: "100%",
+    aspectRatio: "16 / 9",
+    objectFit: "cover",
+    display: "block",
+  };
+
+  const leftInnerStyle = {
+    padding: "14px 16px 16px 16px",
   };
 
   const rightStyle = {
@@ -39,7 +57,7 @@ function MatchReportsPage({ selectedId, onSelect }) {
     borderRadius: "10px",
     border: "1px solid #1f2937",
     backgroundColor: "#020617",
-    padding: "10px 12px",
+    padding: "8px 10px",
     cursor: "pointer",
     fontSize: "11px",
   };
@@ -47,6 +65,7 @@ function MatchReportsPage({ selectedId, onSelect }) {
   const activeListCardStyle = {
     ...listCardStyle,
     borderColor: "#22c55e",
+    boxShadow: "0 0 0 1px #22c55e",
   };
 
   const titleStyle = {
@@ -99,55 +118,66 @@ function MatchReportsPage({ selectedId, onSelect }) {
         Match Reports
       </h2>
       <div style={layoutStyle}>
-        {/* LEFT – ACTIVE REPORT */}
+        {/* LEFT – ACTIVE REPORT WITH HERO IMAGE */}
         <article style={leftStyle}>
-          <h3 style={titleStyle}>{activeReport.title}</h3>
-          <div style={metaStyle}>
-            {activeReport.scoreline} · {activeReport.stadium} ·{" "}
-            {new Date(activeReport.date).toLocaleString("en-GB", {
-              day: "2-digit",
-              month: "short",
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
+          <div style={heroImageWrapperStyle}>
+            <img
+              src={
+                activeReport.heroImage ||
+                "/images/reports/placeholder-afcon-1920x1080.jpg"
+              }
+              alt={activeReport.title}
+              style={heroImageStyle}
+            />
           </div>
+          <div style={leftInnerStyle}>
+            <h3 style={titleStyle}>{activeReport.title}</h3>
+            <div style={metaStyle}>
+              {activeReport.scoreline} · {activeReport.stadium} ·{" "}
+              {new Date(activeReport.date).toLocaleString("en-GB", {
+                day: "2-digit",
+                month: "short",
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </div>
 
-          <div style={bodyStyle}>{activeReport.body}</div>
+            <div style={bodyStyle}>{activeReport.body}</div>
 
-          {match && (
-            <>
-              <h4 style={subHeaderStyle}>Match Stats</h4>
-              <div style={statsBoxStyle}>
-                <div>
-                  Score: {match.homeTeam} {match.homeScore}–{match.awayScore}{" "}
-                  {match.awayTeam}
+            {match && (
+              <>
+                <h4 style={subHeaderStyle}>Match Stats</h4>
+                <div style={statsBoxStyle}>
+                  <div>
+                    Score: {match.homeTeam} {match.homeScore}–{match.awayScore}{" "}
+                    {match.awayTeam}
+                  </div>
+                  <div>Group: {match.group}</div>
+                  {match.stats && (
+                    <>
+                      <div>
+                        Possession: {match.stats.possessionHome}% –{" "}
+                        {match.stats.possessionAway}%
+                      </div>
+                      <div>
+                        Shots on Target:{" "}
+                        {match.stats.shotsOnTargetHome}–{" "}
+                        {match.stats.shotsOnTargetAway}
+                      </div>
+                      <div>
+                        Shots off Target:{" "}
+                        {match.stats.shotsOffTargetHome}–{" "}
+                        {match.stats.shotsOffTargetAway}
+                      </div>
+                    </>
+                  )}
                 </div>
-                <div>Group: {match.group}</div>
-                {match.stats && (
-                  <>
-                    <div>
-                      Possession: {match.stats.possessionHome}% –{" "}
-                      {match.stats.possessionAway}%
-                    </div>
-                    <div>
-                      Shots on Target:{" "}
-                      {match.stats.shotsOnTargetHome}–{" "}
-                      {match.stats.shotsOnTargetAway}
-                    </div>
-                    <div>
-                      Shots off Target:{" "}
-                      {match.stats.shotsOffTargetHome}–{" "}
-                      {match.stats.shotsOffTargetAway}
-                    </div>
-                  </>
-                )}
-              </div>
 
-              <h4 style={subHeaderStyle}>Group Table</h4>
-              {/* Reuse GroupsTable component */}
-              <GroupsTable />
-            </>
-          )}
+                <h4 style={subHeaderStyle}>Group Table</h4>
+                <GroupsTable />
+              </>
+            )}
+          </div>
         </article>
 
         {/* RIGHT – LIST OF REPORTS */}
