@@ -177,4 +177,14 @@ function TopInfoRow({ matches }) {
           <a href="https://joinstriver.com" target="_blank" style={linkStyle}>
             <div style={cardBase}>
               <div style={mainText}>JoinStriver.com</div>
-              <div style={subText}>The Football Soci
+              <div style={subText}>The Football Social App</div>
+              <div style={highlight}>Tap to Join the Movement</div>
+            </div>
+          </a>
+        </div>
+      </section>
+    </>
+  );
+}
+
+export default TopInfoRow;
