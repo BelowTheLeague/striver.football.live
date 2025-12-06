@@ -41,26 +41,28 @@ function LiveNowStrip({ matches, layout = "multi" }) {
     borderRadius: "12px",
     border: "1px solid #1f2937",
     backgroundColor: "#020617",
-    padding: "10px",
+    padding: "12px",
     color: "#e5e7eb",
     flexShrink: 0,
-    minWidth: isSingleLayout ? "100%" : "calc(50% - 8px)", // 2 cards per view in multi
+    minWidth: isSingleLayout ? "100%" : "calc(50% - 8px)",
     maxWidth: isSingleLayout ? "100%" : "calc(50% - 8px)",
+    display: "flex",
+    flexDirection: "column",
+    gap: "12px",
   };
 
   const topRowStyle = {
     display: "flex",
     justifyContent: "space-between",
     fontSize: "11px",
-    marginBottom: "8px",
   };
 
   const liveBadgeStyle = {
-    fontSize: "11px",
+    fontSize: "12px",
     textTransform: "uppercase",
     letterSpacing: "0.1em",
     color: "#22c55e",
-    fontWeight: 600,
+    fontWeight: 700,
   };
 
   const groupStyle = {
@@ -72,30 +74,56 @@ function LiveNowStrip({ matches, layout = "multi" }) {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
-    gap: "8px",
+    gap: "12px",
   };
 
-  const badgeStyle = {
-    width: "40px",
-    height: "40px",
-    borderRadius: "999px",
+  const teamBlockStyle = {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+    flex: 1,
+  };
+
+  const flagStyle = {
+    width: "36px",
+    height: "36px",
+    borderRadius: "50%",
     objectFit: "cover",
-    backgroundColor: "#020617",
+  };
+
+  const teamNameStyle = {
+    fontSize: "12px",
+    fontWeight: 600,
+  };
+
+  const centreColumnStyle = {
+    textAlign: "center",
+    minWidth: "70px",
+    display: "flex",
+    flexDirection: "column",
+    gap: "4px",
+  };
+
+  const clockStyle = {
+    fontSize: "11px",
+    fontWeight: 600,
+    color: "#22c55e",
   };
 
   const scoreStyle = {
-    minWidth: "56px",
-    textAlign: "center",
-    fontSize: isSingleLayout ? "22px" : "18px",
+    fontSize: isSingleLayout ? "28px" : "22px",
     fontWeight: 700,
+  };
+
+  const stadiumStyle = {
+    fontSize: "10px",
+    color: "#9ca3af",
   };
 
   return (
     <section style={sectionStyle}>
       <div style={headerStyle}>
-        <h2 style={titleStyle}>
-          {isSingleLayout ? "Live Match" : "Live Matches"}
-        </h2>
+        <h2 style={titleStyle}>{isSingleLayout ? "Live Match" : "Live Matches"}</h2>
         <span style={countStyle}>
           {live.length} match{live.length !== 1 && "es"}
         </span>
@@ -104,36 +132,38 @@ function LiveNowStrip({ matches, layout = "multi" }) {
       <div style={stripStyle}>
         {live.map((match) => (
           <article key={match.id} style={cardStyle}>
+            {/* TOP ROW */}
             <div style={topRowStyle}>
               <span style={liveBadgeStyle}>
-                {match.minute != null ? `${match.minute}' Live` : "Live"}
+                {match.minute ? `${match.minute}'` : "Live"}
               </span>
               {match.group && <span style={groupStyle}>{match.group}</span>}
             </div>
 
+            {/* MAIN CONTENT — FLAGS + NAMES + SCORE BLOCK */}
             <div style={centreRowStyle}>
-              {/* Home flag */}
-              {match.homeBadge && (
-                <img
-                  src={match.homeBadge}
-                  alt={match.homeTeam}
-                  style={badgeStyle}
-                />
-              )}
-
-              {/* Score */}
-              <div style={scoreStyle}>
-                {match.homeScore}–{match.awayScore}
+              {/* Home */}
+              <div style={teamBlockStyle}>
+                <img src={match.homeBadge} style={flagStyle} alt={match.homeTeam} />
+                <span style={teamNameStyle}>{match.homeTeam}</span>
               </div>
 
-              {/* Away flag */}
-              {match.awayBadge && (
-                <img
-                  src={match.awayBadge}
-                  alt={match.awayTeam}
-                  style={badgeStyle}
-                />
-              )}
+              {/* Score Column */}
+              <div style={centreColumnStyle}>
+                <span style={clockStyle}>
+                  {match.minute ? `${match.minute}'` : "Live"}
+                </span>
+                <span style={scoreStyle}>
+                  {match.homeScore}–{match.awayScore}
+                </span>
+                <span style={stadiumStyle}>{match.stadium}</span>
+              </div>
+
+              {/* Away */}
+              <div style={teamBlockStyle}>
+                <span style={teamNameStyle}>{match.awayTeam}</span>
+                <img src={match.awayBadge} style={flagStyle} alt={match.awayTeam} />
+              </div>
             </div>
           </article>
         ))}
