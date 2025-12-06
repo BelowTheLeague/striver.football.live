@@ -1,3 +1,6 @@
+// src/data/matches.js
+
+// Basic AFCON-style fixtures with statuses for the UI
 export const matches = [
   {
     id: "mor-nig-2025-01-11",
@@ -115,8 +118,4 @@ export const getFeaturedMatches = () => {
   const live = getLiveMatches();
   const total = matches.length;
 
-  if (!live.length) return [];
-
-  const maxFeatured = total >= 6 ? 2 : 1;
-  return live.slice(0, maxFeatured);
-};
+  if (!live.leng
