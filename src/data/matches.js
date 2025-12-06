@@ -118,4 +118,8 @@ export const getFeaturedMatches = () => {
   const live = getLiveMatches();
   const total = matches.length;
 
-  if (!live.leng
+  if (!live.length) return [];
+
+  const maxFeatured = total >= 6 ? 2 : 1;
+  return live.slice(0, maxFeatured);
+};
