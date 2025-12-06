@@ -1,3 +1,4 @@
+// src/App.jsx
 import React from "react";
 import {
   getAllMatches,
@@ -99,7 +100,7 @@ function App() {
           </div>
         </header>
 
-        <LiveNowStrip matches={live} />
+        <LiveNowStrip matches={allMatches} />
         <FeaturedMatches matches={featured} />
         <FixturesList fixtures={fixtures} />
       </div>
