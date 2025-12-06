@@ -3,7 +3,9 @@ import React from "react";
 function FixturesList({ fixtures }) {
   if (!fixtures || fixtures.length === 0) return null;
 
-  const sectionStyle = { marginTop: "32px" };
+  const sectionStyle = {
+    marginTop: "32px",
+  };
 
   const titleStyle = {
     fontSize: "13px",
@@ -25,11 +27,14 @@ function FixturesList({ fixtures }) {
     flexDirection: "column",
     gap: "4px",
     padding: "10px 12px",
-    borderBottom: "1px solid #111827",
+    borderBottom: "1px solid "#111827",
     fontSize: "13px",
   };
 
-  const lastRowStyle = { ...rowStyle, borderBottom: "none" };
+  const lastRowStyle = {
+    ...rowStyle,
+    borderBottom: "none",
+  };
 
   const topRowStyle = {
     fontWeight: 500,
@@ -54,7 +59,7 @@ function FixturesList({ fixtures }) {
     const diffMs = ko.getTime() - now.getTime();
     const diffMins = Math.floor(diffMs / 60000);
     if (diffMins <= 0) return "";
-    return `(${diffMins} min to KO)`;
+    return `${diffMins} min to KO`;
   };
 
   const formatTime = (kickOff) => {
@@ -72,25 +77,17 @@ function FixturesList({ fixtures }) {
         {fixtures.map((m, index) => {
           const countdown = getCountdown(m.kickOff);
           const time = formatTime(m.kickOff);
+          const isLast = index === fixtures.length - 1;
 
           return (
-            <div
-              key={m.id}
-              style={index === fixtures.length - 1 ? lastRowStyle : rowStyle}
-            >
+            <div key={m.id} style={isLast ? lastRowStyle : rowStyle}>
               <div style={topRowStyle}>
-                <span style={labelStyle}>
-                  {m.homeTeam} v {m.awayTeam}
-                </span>
+                {m.homeTeam} v {m.awayTeam}
               </div>
               <div style={bottomRowStyle}>
-                <span>{m.stadium}</span>
-                <span>
-                  {time}{" "}
-                  {countdown && (
-                    <span style={{ color: "#9ca3af" }}>{countdown}</span>
-                  )}
-                </span>
+                <span style={labelStyle}>{m.stadium}</span>
+                <span>{time}</span>
+                {countdown && <span>({countdown})</span>}
               </div>
             </div>
           );
