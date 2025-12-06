@@ -36,8 +36,8 @@ function LiveNowStrip({ matches }) {
   };
 
   const cardStyle = {
-    minWidth: "260px",
-    maxWidth: "320px",
+    minWidth: "220px",
+    maxWidth: "260px",
     borderRadius: "12px",
     border: "1px solid #1f2937",
     backgroundColor: "#020617",
@@ -50,7 +50,7 @@ function LiveNowStrip({ matches }) {
     display: "flex",
     justifyContent: "space-between",
     fontSize: "11px",
-    marginBottom: "4px",
+    marginBottom: "8px",
   };
 
   const liveBadgeStyle = {
@@ -66,35 +66,19 @@ function LiveNowStrip({ matches }) {
     color: "#9ca3af",
   };
 
-  const teamsRowStyle = {
+  const centreRowStyle = {
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
     gap: "8px",
   };
 
-  const sideTeamStyle = {
-    display: "flex",
-    alignItems: "center",
-    gap: "6px",
-    minWidth: 0,
-    flex: 1,
-  };
-
   const badgeStyle = {
-    width: "28px",
-    height: "28px",
+    width: "36px",
+    height: "36px",
     borderRadius: "999px",
     objectFit: "contain",
     backgroundColor: "#020617",
-  };
-
-  const teamNameStyle = {
-    fontSize: "13px",
-    fontWeight: 500,
-    whiteSpace: "nowrap",
-    overflow: "hidden",
-    textOverflow: "ellipsis",
   };
 
   const scoreStyle = {
@@ -117,41 +101,33 @@ function LiveNowStrip({ matches }) {
         {live.map((match) => (
           <article key={match.id} style={cardStyle}>
             <div style={topRowStyle}>
-              <span style={liveBadgeStyle}>{match.minute}' LIVE</span>
+              <span style={liveBadgeStyle}>{match.minute}' Live</span>
               {match.group && <span style={groupStyle}>{match.group}</span>}
             </div>
 
-            <div style={teamsRowStyle}>
-              {/* Home */}
-              <div style={sideTeamStyle}>
-                {match.homeBadge && (
-                  <img
-                    src={match.homeBadge}
-                    alt={match.homeTeam}
-                    style={badgeStyle}
-                  />
-                )}
-                <span style={teamNameStyle}>{match.homeTeam}</span>
-              </div>
+            <div style={centreRowStyle}>
+              {/* Home badge */}
+              {match.homeBadge && (
+                <img
+                  src={match.homeBadge}
+                  alt={match.homeTeam}
+                  style={badgeStyle}
+                />
+              )}
 
               {/* Score */}
               <div style={scoreStyle}>
                 {match.homeScore}–{match.awayScore}
               </div>
 
-              {/* Away */}
-              <div style={{ ...sideTeamStyle, justifyContent: "flex-end" }}>
-                <span style={{ ...teamNameStyle, textAlign: "right" }}>
-                  {match.awayTeam}
-                </span>
-                {match.awayBadge && (
-                  <img
-                    src={match.awayBadge}
-                    alt={match.awayTeam}
-                    style={badgeStyle}
-                  />
-                )}
-              </div>
+              {/* Away badge */}
+              {match.awayBadge && (
+                <img
+                  src={match.awayBadge}
+                  alt={match.awayTeam}
+                  style={badgeStyle}
+                />
+              )}
             </div>
           </article>
         ))}
