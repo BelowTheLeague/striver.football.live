@@ -1,7 +1,7 @@
 // src/components/AfconHeader.jsx
 
 import React from "react";
-import striverLogo from "../assets/striver-logo.png"; 
+import striverLogo from "../striver-logo.png"; 
 // ⬆️ Change this path if your logo file is somewhere else,
 // for example: "./striver-logo.png" or "../../public/striver-logo.png"
 
