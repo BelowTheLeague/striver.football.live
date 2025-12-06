@@ -5,7 +5,6 @@ import {
   getFixtures,
   getLiveMatches,
 } from "./data/matches";
-
 import FeaturedMatches from "./components/FeaturedMatches";
 import LiveNowStrip from "./components/LiveNowStrip";
 import FixturesList from "./components/FixturesList";
@@ -20,7 +19,8 @@ function App() {
     minHeight: "100vh",
     backgroundColor: "#020617",
     color: "#f9fafb",
-    fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
+    fontFamily:
+      "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
   };
 
   const containerStyle = {
@@ -74,30 +74,35 @@ function App() {
 
   return (
     <div style={pageStyle}>
-      <main style={containerStyle}>
+      <div style={containerStyle}>
         <header style={headerStyle}>
           <div style={titleRowStyle}>
             <div>
               <h1 style={titleStyle}>AFCON 2025 Live Centre</h1>
-              <p style={subtitleStyle}>Powered by Striver.Football</p>
+              <p style={subtitleStyle}>
+                Powered by Striver.Football · In partnership with BelowTheLeague
+              </p>
             </div>
-            <div style={{ textAlign: "right", fontSize: "12px", color: "#9ca3af" }}>
-              <div>BelowTheLeague x Striver</div>
-              <div>Live scores • Fixtures • Non league energy</div>
+            <div style={{ textAlign: "right", fontSize: "11px" }}>
+              <div>Live scores · Fixtures · Results</div>
+              <div style={{ color: "#9ca3af" }}>
+                Non league energy for AFCON
+              </div>
             </div>
           </div>
+
           <div style={chipRowStyle}>
             <span style={chipStyle}>Live</span>
             <span style={chipStyle}>Fixtures</span>
             <span style={chipStyle}>Results</span>
-            <span style={chipStyle}>Table</span>
+            <span style={chipStyle}>Tables</span>
           </div>
         </header>
 
+        <LiveNowStrip matches={live} />
         <FeaturedMatches matches={featured} />
-        <LiveNowStrip matches={live.length ? live : allMatches} />
         <FixturesList fixtures={fixtures} />
-      </main>
+      </div>
     </div>
   );
 }
