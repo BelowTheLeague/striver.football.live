@@ -77,11 +77,20 @@ function LiveNowStrip({ matches, layout = "multi" }) {
     gap: "12px",
   };
 
-  const teamBlockStyle = {
+  const teamBlockHomeStyle = {
     display: "flex",
     alignItems: "center",
     gap: "8px",
     flex: 1,
+    justifyContent: "flex-start",
+  };
+
+  const teamBlockAwayStyle = {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+    flex: 1,
+    justifyContent: "flex-end",
   };
 
   const flagStyle = {
@@ -260,8 +269,8 @@ function LiveNowStrip({ matches, layout = "multi" }) {
 
               {/* MAIN CONTENT — FLAGS + NAMES + SCORE BLOCK */}
               <div style={centreRowStyle}>
-                {/* Home */}
-                <div style={teamBlockStyle}>
+                {/* Home: flag left, name right */}
+                <div style={teamBlockHomeStyle}>
                   <img
                     src={match.homeBadge}
                     style={flagStyle}
@@ -281,9 +290,11 @@ function LiveNowStrip({ matches, layout = "multi" }) {
                   <span style={stadiumStyle}>{match.stadium}</span>
                 </div>
 
-                {/* Away */}
-                <div style={teamBlockStyle}>
-                  <span style={teamNameStyle}>{match.awayTeam}</span>
+                {/* Away: name left, flag right */}
+                <div style={teamBlockAwayStyle}>
+                  <span style={{ ...teamNameStyle, textAlign: "right" }}>
+                    {match.awayTeam}
+                  </span>
                   <img
                     src={match.awayBadge}
                     style={flagStyle}
@@ -302,3 +313,61 @@ function LiveNowStrip({ matches, layout = "multi" }) {
                   <span>
                     Pos: {s.groupPositionAway || "-"} ({match.awayTeam})
                   </span>
+                </div>
+
+                {/* Possession */}
+                {renderStatRow(
+                  "Possession",
+                  s.possessionHome,
+                  s.possessionAway
+                )}
+
+                {/* Shots on target */}
+                {renderStatRow(
+                  "Shots on Target",
+                  s.shotsOnTargetHome,
+                  s.shotsOnTargetAway
+                )}
+
+                {/* Shots off target */}
+                {renderStatRow(
+                  "Shots off Target",
+                  s.shotsOffTargetHome,
+                  s.shotsOffTargetAway
+                )}
+
+                {/* Corners */}
+                {renderStatRow("Corners", s.cornersHome, s.cornersAway)}
+
+                {/* Free kicks */}
+                {renderStatRow(
+                  "Free Kicks",
+                  s.freeKicksHome,
+                  s.freeKicksAway
+                )}
+
+                {/* Yellow cards – only if any */}
+                {showYellows &&
+                  renderStatRow(
+                    "Yellow Cards",
+                    s.yellowCardsHome,
+                    s.yellowCardsAway
+                  )}
+
+                {/* Red cards – only if any */}
+                {showReds &&
+                  renderStatRow(
+                    "Red Cards",
+                    s.redCardsHome,
+                    s.redCardsAway
+                  )}
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </section>
+  );
+}
+
+export default LiveNowStrip;
