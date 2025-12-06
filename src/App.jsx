@@ -101,9 +101,10 @@ function App() {
           </div>
         </header>
 
-        <LiveNowStrip matches={allMatches} />
+         <LiveNowStrip matches={allMatches} />
         <FeaturedMatches matches={featured} />
         <FixturesList fixtures={fixtures} />
+        <GroupsTable />
       </div>
     </div>
   );
