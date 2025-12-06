@@ -17,11 +17,8 @@ function GroupsTable() {
     marginBottom: "12px",
   };
 
-  const gridStyle = {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-    gap: "12px",
-  };
+  // Note: grid layout handled by CSS class .groups-grid
+  const gridClassName = "groups-grid";
 
   const cardStyle = {
     borderRadius: "12px",
@@ -93,7 +90,7 @@ function GroupsTable() {
   return (
     <section style={sectionStyle}>
       <h2 style={titleStyle}>Group Standings</h2>
-      <div style={gridStyle}>
+      <div className={gridClassName}>
         {groups.map((group) => (
           <article key={group.id} style={cardStyle}>
             <div style={groupHeaderStyle}>
