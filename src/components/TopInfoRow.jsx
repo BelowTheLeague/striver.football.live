@@ -28,7 +28,7 @@ function TopInfoRow({ matches }) {
     return hours > 0 ? `${hours}h ${rem}m` : `${rem} min`;
   };
 
-  // Fake data until real stats added
+  // Placeholder data until real stats are wired in
   const topScorer = {
     name: "Vincent Aboubakar",
     goals: 5,
@@ -52,7 +52,7 @@ function TopInfoRow({ matches }) {
   // Tablet & desktop: 4 columns (1x4)
   const gridStyle = {
     display: "grid",
-    gridTemplateColumns: "repeat(2, 1fr)", // mobile default
+    gridTemplateColumns: "repeat(2, 1fr)", // default mobile
     gap: "10px",
   };
 
@@ -125,7 +125,7 @@ function TopInfoRow({ matches }) {
 
       <section style={sectionStyle}>
         <div className="top-info-grid" style={gridStyle}>
-          {/* BOX 1 – Next Kick Off */}
+          {/* BOX 1 – Next Kick-off */}
           <div style={cardBase}>
             <div style={cardTitle}>Next Kick-off</div>
             <div style={mainText}>
@@ -175,52 +175,62 @@ function TopInfoRow({ matches }) {
           </div>
 
           {/* BOX 4 – JoinStriver.com (Highlighted Box) */}
-<a href="https://joinstriver.com" target="_blank" rel="noreferrer" style={linkStyle}>
-  <div
-    style={{
-      ...cardBase,
-      backgroundColor: "#22c55e", // bright green
-      border: "1px solid #16a34a",
-      color: "black",
-    }}
-  >
-    {/* JoinStriver.com – bold, black, italic */}
-    <div
-      style={{
-        fontSize: "15px",
-        fontWeight: 700,
-        fontStyle: "italic",
-      }}
-    >
-      JoinStriver.com
-    </div>
+          <a
+            href="https://joinstriver.com"
+            target="_blank"
+            rel="noreferrer"
+            style={linkStyle}
+          >
+            <div
+              style={{
+                ...cardBase,
+                backgroundColor: "#22c55e", // bright green
+                border: "1px solid #16a34a",
+                color: "black",
+              }}
+            >
+              {/* JoinStriver.com – bold, black, italic */}
+              <div
+                style={{
+                  fontSize: "15px",
+                  fontWeight: 700,
+                  fontStyle: "italic",
+                }}
+              >
+                JoinStriver.com
+              </div>
 
-    {/* Join the AFCON chat – white, small, all caps */}
-    <div
-      style={{
-        fontSize: "10px",
-        fontWeight: 600,
-        textTransform: "uppercase",
-        color: "white",
-        marginTop: "2px",
-      }}
-    >
-      Join The AFCON Chat
-    </div>
+              {/* Join the AFCON chat – white, small, all caps */}
+              <div
+                style={{
+                  fontSize: "10px",
+                  fontWeight: 600,
+                  textTransform: "uppercase",
+                  color: "white",
+                  marginTop: "2px",
+                }}
+              >
+                Join The AFCON Chat
+              </div>
 
-    {/* Striver.Football – bold, black, italic */}
-    <div
-      style={{
-        fontSize: "13px",
-        fontWeight: 700,
-        fontStyle: "italic",
-        color: "black",
-        marginTop: "6px",
-      }}
-    >
-      Striver.Football
-    </div>
-  </div>
-</a>
+              {/* Striver.Football – bold, black, italic */}
+              <div
+                style={{
+                  fontSize: "13px",
+                  fontWeight: 700,
+                  fontStyle: "italic",
+                  color: "black",
+                  marginTop: "6px",
+                }}
+              >
+                Striver.Football
+              </div>
+            </div>
+          </a>
+        </div>
+      </section>
+    </>
+  );
+}
 
 export default TopInfoRow;
