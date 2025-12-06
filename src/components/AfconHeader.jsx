@@ -1,7 +1,9 @@
 // src/components/AfconHeader.jsx
-import React from "react";
+import React, { useState } from "react";
 
 function AfconHeader({ onNavChange }) {
+  const [isNavOpen, setIsNavOpen] = useState(false);
+
   const wrapperStyle = {
     marginBottom: "12px",
     borderBottom: "1px solid #111827",
@@ -11,25 +13,22 @@ function AfconHeader({ onNavChange }) {
   // TOP ROW
   const topRowStyle = {
     display: "flex",
-    flexDirection: "column",
     alignItems: "center",
-    gap: "4px",
-    textAlign: "center",
-  };
-
-  const logoRowStyle = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
     gap: "8px",
   };
 
   const logoStyle = {
-    width: "32px",
-    height: "32px",
+    width: "40px",
+    height: "40px",
     borderRadius: "8px",
     objectFit: "contain",
     backgroundColor: "#020617",
+  };
+
+  const centreTextWrapperStyle = {
+    textAlign: "center",
+    flex: 1,
   };
 
   const titleTextStyle = {
@@ -40,275 +39,265 @@ function AfconHeader({ onNavChange }) {
   };
 
   const poweredStyle = {
-    fontSize: "10px",
-    letterSpacing: "0.16em",
+    fontSize: "9px",
+    letterSpacing: "0.18em",
     textTransform: "uppercase",
     color: "#9ca3af",
+    marginTop: "2px",
   };
 
-  // MIDDLE ROW – FEATURE CARDS
-  const middleRowWrapperStyle = {
-    marginTop: "10px",
-    marginBottom: "8px",
-  };
-
-  const middleRowStyle = {
-    display: "flex",
-    gap: "10px",
-    overflowX: "auto",
-    paddingBottom: "6px",
-  };
-
-  const cardStyle = {
-    position: "relative",
-    minWidth: "220px",
-    maxWidth: "260px",
-    borderRadius: "12px",
-    overflow: "hidden",
-    background:
-      "linear-gradient(135deg, #22c55e, #0f766e, #020617)",
-    border: "1px solid #1f2937",
-    flexShrink: 0,
-  };
-
-  const cardInnerStyle = {
-    position: "relative",
-    padding: "10px 12px",
-    height: "100px",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "space-between",
-  };
-
-  const cardTagStyle = {
-    fontSize: "10px",
-    textTransform: "uppercase",
-    letterSpacing: "0.12em",
-    color: "#d1d5db",
-    marginBottom: "4px",
-  };
-
-  const cardTitleStyle = {
-    fontSize: "14px",
-    fontWeight: 700,
-    color: "#f9fafb",
-  };
-
-  const cardMetaStyle = {
+  const menuButtonStyle = {
     fontSize: "11px",
-    color: "#e5e7eb",
-    marginTop: "4px",
-  };
-
-  const cardLinkStyle = {
-    textDecoration: "none",
-    color: "inherit",
-  };
-
-  const featureCards = [
-    {
-      id: "highlights",
-      tag: "Match Highlights",
-      title: "Latest Goals and Highlights",
-      meta: "Watch the big moments from AFCON 2025",
-      href: "#highlights",
-    },
-    {
-      id: "var",
-      tag: "VAR Watch",
-      title: "VAR Controversy Centre",
-      meta: "All the key checks and big calls",
-      href: "#var",
-    },
-    {
-      id: "goal-of-tournament",
-      tag: "Goal of the Tournament",
-      title: "Vote for Goal of the Tournament",
-      meta: "Have your say on the top strikes",
-      href: "#goal-of-tournament",
-    },
-    {
-      id: "podcast",
-      tag: "Striver AFCON Podcast",
-      title: "Daily AFCON Recap Show",
-      meta: "Listen on Striver.Football",
-      href: "#podcast",
-    },
-    {
-      id: "fan-chat",
-      tag: "Fan Chat",
-      title: "Join the AFCON Fan Chat",
-      meta: "Live reaction inside Striver.Football",
-      href: "https://joinstriver.com",
-    },
-  ];
-
-  // BOTTOM ROW – NAV AND SOCIAL
-  const bottomRowStyle = {
-    display: "flex",
-    flexWrap: "wrap",
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: "8px",
-    paddingTop: "6px",
-    borderTop: "1px solid #111827",
-  };
-
-  const navItemsRowStyle = {
-    display: "flex",
-    flexWrap: "wrap",
-    gap: "6px",
-  };
-
-  const navItemStyle = {
-    fontSize: "11px",
-    padding: "4px 10px",
+    padding: "6px 12px",
     borderRadius: "999px",
     border: "1px solid #1f2937",
     backgroundColor: "#020617",
     color: "#e5e7eb",
     textTransform: "uppercase",
-    letterSpacing: "0.08em",
+    letterSpacing: "0.12em",
     cursor: "pointer",
+  };
+
+  // FULL SCREEN NAV OVERLAY
+  const overlayStyle = {
+    position: "fixed",
+    inset: 0,
+    backgroundColor: "rgba(0, 0, 0, 0.88)",
+    zIndex: 50,
+    display: "flex",
+    flexDirection: "column",
+  };
+
+  const overlayTopBarStyle = {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "16px",
+    borderBottom: "1px solid #111827",
+  };
+
+  const overlayLogoRowStyle = {
+    display: "flex",
+    alignItems: "center",
+    gap: "8px",
+  };
+
+  const overlayTitleStyle = {
+    fontSize: "13px",
+    textTransform: "uppercase",
+    letterSpacing: "0.16em",
+  };
+
+  const closeButtonStyle = {
+    fontSize: "11px",
+    padding: "6px 12px",
+    borderRadius: "999px",
+    border: "1px solid #1f2937",
+    backgroundColor: "#020617",
+    color: "#e5e7eb",
+    textTransform: "uppercase",
+    letterSpacing: "0.12em",
+    cursor: "pointer",
+  };
+
+  const overlayNavStyle = {
+    flex: 1,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  };
+
+  const overlayNavListStyle = {
+    listStyle: "none",
+    padding: 0,
+    margin: 0,
+    textAlign: "center",
+    display: "flex",
+    flexDirection: "column",
+    gap: "16px",
+  };
+
+  const overlayNavItemStyle = {
+    fontSize: "20px",
+    textTransform: "uppercase",
+    letterSpacing: "0.18em",
+    cursor: "pointer",
+  };
+
+  const overlayNavSubStyle = {
+    fontSize: "11px",
+    color: "#9ca3af",
+    marginTop: "4px",
   };
 
   const socialRowStyle = {
     display: "flex",
-    alignItems: "center",
-    gap: "6px",
+    justifyContent: "center",
+    gap: "10px",
+    paddingBottom: "18px",
   };
 
   const socialIconStyle = {
-    width: "24px",
-    height: "24px",
+    width: "30px",
+    height: "30px",
     borderRadius: "999px",
     border: "1px solid #1f2937",
     backgroundColor: "#020617",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    fontSize: "12px",
+    fontSize: "13px",
     color: "#e5e7eb",
     textDecoration: "none",
   };
 
   const handleNavClick = (page) => {
     if (onNavChange) onNavChange(page);
+    setIsNavOpen(false);
   };
 
   return (
-    <header style={wrapperStyle}>
-      {/* TOP ROW */}
-      <div style={topRowStyle}>
-        <div style={logoRowStyle}>
+    <>
+      <header style={wrapperStyle}>
+        {/* TOP ROW ONLY – LOGOS + TEXT + MENU BUTTON */}
+        <div style={topRowStyle}>
+          {/* Left – Striver Logo */}
           <img
             src="/logos/striver.png"
             alt="Striver.Football"
             style={logoStyle}
           />
-          <span style={titleTextStyle}>AFCON 2025 Live</span>
-        </div>
-        <div style={poweredStyle}>
-          Powered by BelowTheLeague.com
-        </div>
-      </div>
 
-      {/* MIDDLE ROW – FEATURE CARDS */}
-      <div style={middleRowWrapperStyle}>
-        <div style={middleRowStyle}>
-          {featureCards.map((card) => (
-            <a
-              key={card.id}
-              href={card.href}
-              style={cardLinkStyle}
-              target={card.href.startsWith("http") ? "_blank" : "_self"}
-              rel="noreferrer"
+          {/* Centre – AFCON 2025 LIVE / Powered by BTL */}
+          <div style={centreTextWrapperStyle}>
+            <div style={titleTextStyle}>AFCON 2025 Live</div>
+            <div style={poweredStyle}>Powered by BelowTheLeague.com</div>
+          </div>
+
+          {/* Right – BTL Logo + Menu */}
+          <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
+            <img
+              src="/logos/btl.png"
+              alt="BelowTheLeague"
+              style={logoStyle}
+            />
+            <button
+              type="button"
+              style={menuButtonStyle}
+              onClick={() => setIsNavOpen(true)}
             >
-              <article style={cardStyle}>
-                <div style={cardInnerStyle}>
-                  <div>
-                    <div style={cardTagStyle}>{card.tag}</div>
-                    <div style={cardTitleStyle}>{card.title}</div>
-                  </div>
-                  {card.meta && (
-                    <div style={cardMetaStyle}>{card.meta}</div>
-                  )}
+              Menu
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* FULL SCREEN NAV OVERLAY */}
+      {isNavOpen && (
+        <div style={overlayStyle}>
+          {/* Top bar inside overlay */}
+          <div style={overlayTopBarStyle}>
+            <div style={overlayLogoRowStyle}>
+              <img
+                src="/logos/striver.png"
+                alt="Striver.Football"
+                style={{ ...logoStyle, width: 30, height: 30 }}
+              />
+              <span style={overlayTitleStyle}>AFCON 2025 Live</span>
+            </div>
+            <button
+              type="button"
+              style={closeButtonStyle}
+              onClick={() => setIsNavOpen(false)}
+            >
+              Close
+            </button>
+          </div>
+
+          {/* Main nav items */}
+          <div style={overlayNavStyle}>
+            <ul style={overlayNavListStyle}>
+              <li onClick={() => handleNavClick("home")}>
+                <div style={overlayNavItemStyle}>Home</div>
+                <div style={overlayNavSubStyle}>
+                  Dashboard · Live · Reports · News
                 </div>
-              </article>
+              </li>
+              <li onClick={() => handleNavClick("live")}>
+                <div style={overlayNavItemStyle}>Live Games</div>
+                <div style={overlayNavSubStyle}>
+                  Every match currently in play
+                </div>
+              </li>
+              <li onClick={() => handleNavClick("fixtures")}>
+                <div style={overlayNavItemStyle}>Fixtures</div>
+                <div style={overlayNavSubStyle}>
+                  All upcoming AFCON 2025 games
+                </div>
+              </li>
+              <li onClick={() => handleNavClick("results")}>
+                <div style={overlayNavItemStyle}>Results</div>
+                <div style={overlayNavSubStyle}>
+                  Finals scores and match stats
+                </div>
+              </li>
+              <li onClick={() => handleNavClick("tables")}>
+                <div style={overlayNavItemStyle}>Tables</div>
+                <div style={overlayNavSubStyle}>
+                  Group standings and positions
+                </div>
+              </li>
+              <li onClick={() => handleNavClick("reports")}>
+                <div style={overlayNavItemStyle}>Match Reports</div>
+                <div style={overlayNavSubStyle}>
+                  Write ups, stats, pictures, reaction
+                </div>
+              </li>
+              <li onClick={() => handleNavClick("news")}>
+                <div style={overlayNavItemStyle}>News</div>
+                <div style={overlayNavSubStyle}>
+                  Tournament headlines and updates
+                </div>
+              </li>
+              <li onClick={() => handleNavClick("players")}>
+                <div style={overlayNavItemStyle}>Player Stats</div>
+                <div style={overlayNavSubStyle}>
+                  Goals, assists, cards, clean sheets
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          {/* Social row at bottom */}
+          <div style={socialRowStyle}>
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noreferrer"
+              style={socialIconStyle}
+            >
+              f
             </a>
-          ))}
+            <a
+              href="https://x.com"
+              target="_blank"
+              rel="noreferrer"
+              style={socialIconStyle}
+            >
+              X
+            </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noreferrer"
+              style={socialIconStyle}
+            >
+              IG
+            </a>
+          </div>
         </div>
-      </div>
-
-      {/* BOTTOM ROW – NAV + SOCIAL */}
-      <div style={bottomRowStyle}>
-        <nav style={navItemsRowStyle}>
-          <span
-            style={navItemStyle}
-            onClick={() => handleNavClick("live")}
-          >
-            Live Games
-          </span>
-          <span
-            style={navItemStyle}
-            onClick={() => handleNavClick("fixtures")}
-          >
-            Fixtures
-          </span>
-          <span
-            style={navItemStyle}
-            onClick={() => handleNavClick("results")}
-          >
-            Results
-          </span>
-          <span
-            style={navItemStyle}
-            onClick={() => handleNavClick("tables")}
-          >
-            Tables
-          </span>
-          <span
-            style={navItemStyle}
-            onClick={() => handleNavClick("reports")}
-          >
-            Reports
-          </span>
-          <span
-            style={navItemStyle}
-            onClick={() => handleNavClick("news")}
-          >
-            News
-          </span>
-        </nav>
-
-        <div style={socialRowStyle}>
-          <a
-            href="https://facebook.com"
-            target="_blank"
-            rel="noreferrer"
-            style={socialIconStyle}
-          >
-            f
-          </a>
-          <a
-            href="https://x.com"
-            target="_blank"
-            rel="noreferrer"
-            style={socialIconStyle}
-          >
-            X
-          </a>
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noreferrer"
-            style={socialIconStyle}
-          >
-            IG
-          </a>
-        </div>
-      </div>
-    </header>
+      )}
+    </>
   );
 }
 
