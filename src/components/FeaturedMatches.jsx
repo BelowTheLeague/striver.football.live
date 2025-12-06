@@ -25,7 +25,7 @@ function FeaturedMatches({ matches }) {
     fontSize: "11px",
     textTransform: "uppercase",
     letterSpacing: "0.08em",
-    color: "#9ca3af",
+    color: "#22c55e", // same green as minute
     marginBottom: "8px",
   };
 
