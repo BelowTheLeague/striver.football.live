@@ -37,17 +37,49 @@ function LatestNewsSection({ onViewAll, onOpenNews }) {
   };
 
   const cardStyle = {
-    borderRadius: "10px",
+    borderRadius: "12px",
     border: "1px solid #1f2937",
     backgroundColor: "#020617",
-    padding: "10px 12px",
+    padding: "8px 10px",
     cursor: "pointer",
+    display: "flex",
+    alignItems: "stretch",
+    gap: "10px",
+  };
+
+  const imageWrapperStyle = {
+    flexShrink: 0,
+    width: "80px",
+    height: "80px",
+    borderRadius: "10px",
+    overflow: "hidden",
+    backgroundColor: "#111827",
+  };
+
+  const imageStyle = {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    display: "block",
+  };
+
+  const contentStyle = {
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+  };
+
+  const titleRowStyle = {
+    display: "flex",
+    alignItems: "center",
+    gap: "6px",
+    marginBottom: "2px",
   };
 
   const cardTitleStyle = {
     fontSize: "13px",
-    fontWeight: 600,
-    marginBottom: "2px",
+    fontWeight: 700,
   };
 
   const metaStyle = {
@@ -61,35 +93,85 @@ function LatestNewsSection({ onViewAll, onOpenNews }) {
     color: "#e5e7eb",
   };
 
+  const liveBadgeBase = {
+    fontSize: "9px",
+    fontWeight: 700,
+    textTransform: "uppercase",
+    padding: "2px 6px",
+    borderRadius: "999px",
+    backgroundColor: "#b91c1c",
+    color: "#fef2f2",
+  };
+
+  // Add blinking animation like PlanetRugby "Live" vibes
+  const styleTag = `
+    @keyframes livePulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.97); }
+    }
+    .live-badge-pulse {
+      animation: livePulse 1.1s infinite;
+    }
+  `;
+
   return (
-    <section style={sectionStyle}>
-      <div style={headerRowStyle}>
-        <h2 style={titleStyle}>Latest News</h2>
-        <span style={viewAllStyle} onClick={onViewAll}>
-          View all
-        </span>
-      </div>
-      <div style={listStyle}>
-        {latest.map((item) => (
-          <article
-            key={item.id}
-            style={cardStyle}
-            onClick={() => onOpenNews(item.id)}
-          >
-            <h3 style={cardTitleStyle}>{item.title}</h3>
-            <div style={metaStyle}>
-              {new Date(item.date).toLocaleString("en-GB", {
-                day: "2-digit",
-                month: "short",
-                hour: "2-digit",
-                minute: "2-digit",
-              })}
-            </div>
-            <p style={blurbStyle}>{item.blurb}</p>
-          </article>
-        ))}
-      </div>
-    </section>
+    <>
+      <style>{styleTag}</style>
+      <section style={sectionStyle}>
+        <div style={headerRowStyle}>
+          <h2 style={titleStyle}>Latest News</h2>
+          <span style={viewAllStyle} onClick={onViewAll}>
+            View all
+          </span>
+        </div>
+        <div style={listStyle}>
+          {latest.map((item, index) => {
+            const showLive = item.isLive || index === 0; // force latest to look live
+
+            return (
+              <article
+                key={item.id}
+                style={cardStyle}
+                onClick={() => onOpenNews(item.id)}
+              >
+                <div style={imageWrapperStyle}>
+                  <img
+                    src={
+                      item.image ||
+                      "/images/news/placeholder-news-square.jpg"
+                    }
+                    alt={item.title}
+                    style={imageStyle}
+                  />
+                </div>
+                <div style={contentStyle}>
+                  <div style={titleRowStyle}>
+                    <h3 style={cardTitleStyle}>{item.title}</h3>
+                    {showLive && (
+                      <span
+                        className="live-badge-pulse"
+                        style={liveBadgeBase}
+                      >
+                        LIVE!
+                      </span>
+                    )}
+                  </div>
+                  <div style={metaStyle}>
+                    {new Date(item.date).toLocaleString("en-GB", {
+                      day: "2-digit",
+                      month: "short",
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                  </div>
+                  <p style={blurbStyle}>{item.blurb}</p>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+    </>
   );
 }
 
