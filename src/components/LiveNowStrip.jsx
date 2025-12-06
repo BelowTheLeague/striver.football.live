@@ -1,11 +1,13 @@
+// src/components/LiveNowStrip.jsx
 import React from "react";
 
 function LiveNowStrip({ matches }) {
   const live = (matches || []).filter((m) => m.status === "live");
-
   if (live.length === 0) return null;
 
-  const sectionStyle = { marginTop: "24px" };
+  const sectionStyle = {
+    marginTop: "24px",
+  };
 
   const headerStyle = {
     display: "flex",
@@ -115,20 +117,20 @@ function LiveNowStrip({ matches }) {
         {live.map((match) => (
           <article key={match.id} style={cardStyle}>
             <div style={topRowStyle}>
-              <span style={liveBadgeStyle}>
-                {match.minute}' LIVE
-              </span>
+              <span style={liveBadgeStyle}>{match.minute}' LIVE</span>
               {match.group && <span style={groupStyle}>{match.group}</span>}
             </div>
 
             <div style={teamsRowStyle}>
               {/* Home */}
               <div style={sideTeamStyle}>
-                <img
-                  src={match.homeBadge}
-                  alt={match.homeTeam}
-                  style={badgeStyle}
-                />
+                {match.homeBadge && (
+                  <img
+                    src={match.homeBadge}
+                    alt={match.homeTeam}
+                    style={badgeStyle}
+                  />
+                )}
                 <span style={teamNameStyle}>{match.homeTeam}</span>
               </div>
 
@@ -139,16 +141,16 @@ function LiveNowStrip({ matches }) {
 
               {/* Away */}
               <div style={{ ...sideTeamStyle, justifyContent: "flex-end" }}>
-                <span
-                  style={{ ...teamNameStyle, textAlign: "right" }}
-                >
+                <span style={{ ...teamNameStyle, textAlign: "right" }}>
                   {match.awayTeam}
                 </span>
-                <img
-                  src={match.awayBadge}
-                  alt={match.awayTeam}
-                  style={badgeStyle}
-                />
+                {match.awayBadge && (
+                  <img
+                    src={match.awayBadge}
+                    alt={match.awayTeam}
+                    style={badgeStyle}
+                  />
+                )}
               </div>
             </div>
           </article>
