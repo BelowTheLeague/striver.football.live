@@ -31,29 +31,50 @@ function MatchReportsSection({ onViewAll, onOpenReport }) {
   };
 
   const listStyle = {
-    display: "flex",
-    flexDirection: "column",
-    gap: "8px",
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+    gap: "12px",
   };
 
   const cardStyle = {
-    borderRadius: "10px",
+    borderRadius: "12px",
     border: "1px solid #1f2937",
-    backgroundColor: "#020617",
-    padding: "10px 12px",
+    background:
+      "linear-gradient(145deg, #020617 0%, #020617 40%, #111827 100%)",
+    overflow: "hidden",
     cursor: "pointer",
+    boxShadow: "0 8px 16px rgba(0,0,0,0.4)",
+    display: "flex",
+    flexDirection: "column",
+  };
+
+  const imageWrapperStyle = {
+    width: "100%",
+    position: "relative",
+    overflow: "hidden",
+  };
+
+  const imageStyle = {
+    width: "100%",
+    aspectRatio: "16 / 9",
+    objectFit: "cover",
+    display: "block",
+  };
+
+  const contentStyle = {
+    padding: "10px 12px 12px 12px",
   };
 
   const cardTitleStyle = {
     fontSize: "13px",
-    fontWeight: 600,
-    marginBottom: "2px",
+    fontWeight: 700,
+    marginBottom: "4px",
   };
 
   const metaStyle = {
     fontSize: "10px",
     color: "#9ca3af",
-    marginBottom: "4px",
+    marginBottom: "6px",
   };
 
   const summaryStyle = {
@@ -76,17 +97,29 @@ function MatchReportsSection({ onViewAll, onOpenReport }) {
             style={cardStyle}
             onClick={() => onOpenReport(report.id)}
           >
-            <h3 style={cardTitleStyle}>{report.title}</h3>
-            <div style={metaStyle}>
-              {report.scoreline} ·{" "}
-              {new Date(report.date).toLocaleString("en-GB", {
-                day: "2-digit",
-                month: "short",
-                hour: "2-digit",
-                minute: "2-digit",
-              })}
+            <div style={imageWrapperStyle}>
+              <img
+                src={
+                  report.heroImage ||
+                  "/images/reports/placeholder-afcon-1920x1080.jpg"
+                }
+                alt={report.title}
+                style={imageStyle}
+              />
             </div>
-            <p style={summaryStyle}>{report.summary}</p>
+            <div style={contentStyle}>
+              <h3 style={cardTitleStyle}>{report.title}</h3>
+              <div style={metaStyle}>
+                {report.scoreline} · {report.stadium} ·{" "}
+                {new Date(report.date).toLocaleString("en-GB", {
+                  day: "2-digit",
+                  month: "short",
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </div>
+              <p style={summaryStyle}>{report.summary}</p>
+            </div>
           </article>
         ))}
       </div>
