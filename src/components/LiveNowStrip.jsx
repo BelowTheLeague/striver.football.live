@@ -2,138 +2,69 @@
 import React from "react";
 
 function LiveNowStrip({ matches }) {
-  const live = (matches || []).filter((m) => m.status === "live");
-  if (live.length === 0) return null;
+  const all = matches || [];
+  const live = all.filter((m) => m.status === "live");
+
+  const now = new Date();
+
+  // Find next upcoming fixture
+  const upcoming = all
+    .filter((m) => m.status === "not_started" && m.kickOff)
+    .sort(
+      (a, b) =>
+        new Date(a.kickOff).getTime() - new Date(b.kickOff).getTime()
+    );
+
+  const nextFixture = upcoming[0] || null;
+
+  const getCountdown = (kickOff) => {
+    if (!kickOff) return "";
+    const ko = new Date(kickOff);
+    const diffMs = ko.getTime() - now.getTime();
+    if (diffMs <= 0) return "Kicking off now";
+
+    const totalMins = Math.floor(diffMs / 60000);
+    const hours = Math.floor(totalMins / 60);
+    const mins = totalMins % 60;
+
+    if (hours <= 0) return `${mins} min`;
+    return `${hours}h ${mins}m`;
+  };
+
+  const nextCountdown = nextFixture
+    ? getCountdown(nextFixture.kickOff)
+    : "No upcoming fixture";
+
+  const nextFixtureLabel = nextFixture
+    ? `${nextFixture.homeTeam} v ${nextFixture.awayTeam}`
+    : "—";
+
+  const nextFixtureTime =
+    nextFixture && nextFixture.kickOff
+      ? new Date(nextFixture.kickOff).toLocaleTimeString("en-GB", {
+          hour: "2-digit",
+          minute: "2-digit",
+        })
+      : "";
+
+  // Placeholder top scorer data – swap later when you have real stats
+  const topScorer = {
+    name: "Vincent Aboubakar",
+    goals: 5,
+    country: "Cameroon",
+    photo: "/players/aboubakar.png", // update path when you have it
+    badge: "/badges/cameroon.png",
+  };
 
   const sectionStyle = {
     marginTop: "24px",
   };
 
-  const headerStyle = {
+  const summaryRowStyle = {
     display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: "8px",
-  };
-
-  const titleStyle = {
-    fontSize: "13px",
-    textTransform: "uppercase",
-    letterSpacing: "0.12em",
-    fontWeight: 600,
-  };
-
-  const countStyle = {
-    fontSize: "12px",
-    color: "#9ca3af",
-  };
-
-  const stripStyle = {
-    display: "flex",
-    gap: "12px",
-    overflowX: "auto",
-    paddingBottom: "6px",
-  };
-
-  const cardStyle = {
-    minWidth: "220px",
-    maxWidth: "260px",
-    borderRadius: "12px",
-    border: "1px solid #1f2937",
-    backgroundColor: "#020617",
-    padding: "10px",
-    color: "#e5e7eb",
-    flexShrink: 0,
-  };
-
-  const topRowStyle = {
-    display: "flex",
-    justifyContent: "space-between",
-    fontSize: "11px",
-    marginBottom: "8px",
-  };
-
-  const liveBadgeStyle = {
-    fontSize: "11px",
-    textTransform: "uppercase",
-    letterSpacing: "0.1em",
-    color: "#22c55e",
-    fontWeight: 600,
-  };
-
-  const groupStyle = {
-    fontSize: "11px",
-    color: "#9ca3af",
-  };
-
-  const centreRowStyle = {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
+    flexWrap: "wrap",
     gap: "8px",
+    marginBottom: "12px",
   };
 
-  const badgeStyle = {
-    width: "36px",
-    height: "36px",
-    borderRadius: "999px",
-    objectFit: "contain",
-    backgroundColor: "#020617",
-  };
-
-  const scoreStyle = {
-    minWidth: "56px",
-    textAlign: "center",
-    fontSize: "18px",
-    fontWeight: 700,
-  };
-
-  return (
-    <section style={sectionStyle}>
-      <div style={headerStyle}>
-        <h2 style={titleStyle}>Live Right Now</h2>
-        <span style={countStyle}>
-          {live.length} match{live.length !== 1 && "es"}
-        </span>
-      </div>
-
-      <div style={stripStyle}>
-        {live.map((match) => (
-          <article key={match.id} style={cardStyle}>
-            <div style={topRowStyle}>
-              <span style={liveBadgeStyle}>{match.minute}' Live</span>
-              {match.group && <span style={groupStyle}>{match.group}</span>}
-            </div>
-
-            <div style={centreRowStyle}>
-              {/* Home badge */}
-              {match.homeBadge && (
-                <img
-                  src={match.homeBadge}
-                  alt={match.homeTeam}
-                  style={badgeStyle}
-                />
-              )}
-
-              {/* Score */}
-              <div style={scoreStyle}>
-                {match.homeScore}–{match.awayScore}
-              </div>
-
-              {/* Away badge */}
-              {match.awayBadge && (
-                <img
-                  src={match.awayBadge}
-                  alt={match.awayTeam}
-                  style={badgeStyle}
-                />
-              )}
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-export default LiveNowStrip;
+  const summaryCardBase =
